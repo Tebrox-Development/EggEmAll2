@@ -38,4 +38,8 @@ public final class EntityCaptureEvent extends EntityEvent implements Cancellable
 	public @NotNull HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 }

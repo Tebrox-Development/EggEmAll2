@@ -83,7 +83,6 @@ public final class Settings extends SimpleSettings {
 		public static Boolean PREVENT_CATCHING_TAMED;
 		public static Boolean PREVENT_CATCHING_SHEARED_SHEEP;
 		public static Boolean REQUIRE_PERMISSIONS;
-		public static Boolean REQUIRE_PLAYER_BUILD_ACCESS;
 
 		private static void init() {
 			setPathPrefix("Restrictions");

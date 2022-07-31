@@ -24,4 +24,8 @@ public final class EntityEscapeCaptureEvent extends EntityEvent {
 	public @NotNull HandlerList getHandlers() {
 		return handlers;
 	}
+	
+	public static HandlerList getHandlerList() {
+		return handlers;
+	}
 }
