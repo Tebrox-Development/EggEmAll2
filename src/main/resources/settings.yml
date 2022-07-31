@@ -1,0 +1,44 @@
+#
+# Dirty Dog Gaming EggEmAll 2
+#
+Version: 1
+LogPrefix: "&8[&aEggEmAll&8]"
+ChatPrefix: "&8[&aEggEmAll&8]"
+Log_Lag_Over_Millis: 100
+Debug: [ ]
+Command_Aliases: [ eggemall ]
+
+BlacklistWorlds:
+  AsWhitelist: false
+  Worlds:
+    - Some_Blocked_World
+
+Particles:
+  EggTrails: true
+  PlayerThrowOnly: true
+  ExplosionOnSuccess: true
+  SmokeOnEscape: true
+
+CatchChance:
+  ChancePercentage: 50
+  SpawnChickenOnFail: true
+  RemoveEntityOnFail: false
+  AddLoreToSpawnEgg: true
+
+Restrictions:
+  OnlyAllowPlayerThrownEggs: true
+  PreventCatchingBabyEntities: true
+  PreventCatchingTamedEntities: true
+  PreventCatchingShearedSheep: true
+  RequirePermissions: true
+
+EntityInventories:
+  DeleteVillagerInventoryOnCatch: true
+
+Messages:
+  NoPermissions: "Sorry you don't have permission to catch {entity}"
+  CatchSuccess: "&2Congrats you got the {entity} spawn egg!"
+  CatchFailedChance: "&c&oOh No! &6&oLooks like that {entity} got away. Better luck next time..."
+  NoBabies: "Sorry, you cannot catch baby entities"
+  NoTamed: "Sorry, you cannot catch tamed entities"
+  NoShearedSheep: "Sorry, you cannot catch sheared sheep"
