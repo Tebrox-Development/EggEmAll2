@@ -1,4 +1,4 @@
-package dev.shadmage.eggemall2.Model;
+package dev.shadmage.eggemall2.Utils;
 
 import org.bukkit.entity.Entity;
 

@@ -1,12 +1,16 @@
 package dev.shadmage.eggemall2.Events;
 
+import lombok.NoArgsConstructor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.mineacademy.fo.annotation.AutoRegister;
 import org.mineacademy.fo.menu.Menu;
 
+@AutoRegister
+@NoArgsConstructor
 public final class InventoryInteractionListener implements Listener {
 
 	/**
