@@ -1,16 +1,18 @@
 package dev.shadmage.eggemall2.Settings;
 
-import org.mineacademy.fo.Common;
 import org.mineacademy.fo.settings.SimpleSettings;
 
 import java.util.List;
 
 public final class Settings extends SimpleSettings {
 
+	public static String LOG_PREFIX;
+	public static String CHAT_PREFIX;
+
 	private static void init() {
 		setPathPrefix("");
-		Common.setLogPrefix(getString("LogPrefix"));
-		Common.setTellPrefix(getString("ChatPrefix"));
+		LOG_PREFIX = getString("LogPrefix");
+		CHAT_PREFIX = getString("ChatPrefix");
 	}
 
 	@Override
@@ -19,23 +21,6 @@ public final class Settings extends SimpleSettings {
 		return getInteger("Version");
 	}
 
-	/*
-	Example settings category
-
-
-	public static class EggCatcher {
-		public static String EGGCATCHER_GENERAL_CHAT_PREFIX;
-		public static Boolean EGGCATCHER_GENERAL_UsePermissions;
-		public static List<String> EGGCATCHER_TRAILS_DisabledWorlds;
-
-		private static void init() {
-			setPathPrefix("ExampleSettings");
-			EGGCATCHER_GENERAL_CHAT_PREFIX = getString("ChatPrefix");
-			EGGCATCHER_GENERAL_UsePermissions = getBoolean("UsePermissions");
-			EGGCATCHER_TRAILS_DisabledWorlds = getList("Disabled-Worlds", String.class);
-		}
-	}
-	*/
 	public static class BlacklistWorlds {
 		public static Boolean AS_WHITELIST;
 		public static List<String> WORLDS;
@@ -97,10 +82,9 @@ public final class Settings extends SimpleSettings {
 	public static class EntityInventories {
 		public static Boolean ERASE_ENTITY_INVENTORY;
 
-
 		private static void init() {
 			setPathPrefix("EntityInventories");
-			ERASE_ENTITY_INVENTORY = getBoolean("DeleteVillagerInventoryOnCatch");
+			ERASE_ENTITY_INVENTORY = getBoolean("DeleteInventoryOnCatch");
 		}
 	}
 
@@ -122,5 +106,4 @@ public final class Settings extends SimpleSettings {
 			NO_SHEARED_SHEEP = getString("NoShearedSheep");
 		}
 	}
-
 }

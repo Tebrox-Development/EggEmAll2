@@ -64,15 +64,13 @@ public final class EggListener implements Listener {
 
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
 	public void onEntityHitByEgg(EntityDamageEvent event) {
+		Common.setTellPrefix(Settings.CHAT_PREFIX);
 		Entity targetEntity = event.getEntity();
-		if (!(event instanceof EntityDamageByEntityEvent))
+		if (!(event instanceof EntityDamageByEntityEvent damageEvent))
 			return;
 
-		EntityDamageByEntityEvent damageEvent = (EntityDamageByEntityEvent) event;
-		if (!(damageEvent.getDamager() instanceof Egg))
+		if (!(damageEvent.getDamager() instanceof Egg egg))
 			return;
-
-		Egg egg = (Egg) damageEvent.getDamager();
 
 		EntityCaptureEvent entityCaptureEvent = new EntityCaptureEvent(targetEntity, egg);
 		EntityEscapeCaptureEvent entityEscapeEvent = new EntityEscapeCaptureEvent(targetEntity, egg);
@@ -146,7 +144,7 @@ public final class EggListener implements Listener {
 
 		ItemStack eggStack = EggEmAllPlugin.catchableMobs.getSpawnEgg(targetEntity);
 
-		if (!Settings.EntityInventories.ERASE_ENTITY_INVENTORY) {
+		if (!Settings.EntityInventories.ERASE_ENTITY_INVENTORY && targetEntity instanceof InventoryHolder) {
 			ItemStack[] items = ((InventoryHolder) targetEntity).getInventory().getContents();
 			for (ItemStack itemStack : items) {
 				if (itemStack != null) {

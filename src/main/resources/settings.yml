@@ -22,7 +22,7 @@ Particles:
 CatchChance:
   ChancePercentage: 50
   SpawnChickenOnFail: true
-  RemoveEntityOnFail: false
+  RemoveEntityOnFail: true
   AddLoreToSpawnEgg: true
 
 Restrictions:
@@ -33,7 +33,7 @@ Restrictions:
   RequirePermissions: true
 
 EntityInventories:
-  DeleteVillagerInventoryOnCatch: true
+  DeleteInventoryOnCatch: true
 
 Messages:
   NoPermissions: "Sorry you don't have permission to catch {entity}"

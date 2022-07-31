@@ -9,3 +9,13 @@ libraries:
   - org.openjdk.nashorn:nashorn-core:15.4
 softdepend: [ CMI, Vault, GriefPrevention, AuthMe, BanManager, BungeeChatAPI, DiscordSRV, Factions, Feudal, ItemsAdder, Essentials, LegacyFactions, Lands, LuckPerms, Multiverse-Core, MVdWPlaceholderAPI, MythicMobs, mcMMO, NashornPlus, Nicky, PlaceholderAPI, ProtocolLib, SimpleClans, Towny, TownyChat, WorldEdit ]
 website: www.dirtydoggaming.co.za
+
+permissions:
+  eggemall.all:
+    description: Gives access to catch all types of mobs.
+    default: op
+    children:
+      eggemall.villagers: true
+      eggemall.aggressive: true
+      eggemall.passive: true
+      eggemall.unknown: true
