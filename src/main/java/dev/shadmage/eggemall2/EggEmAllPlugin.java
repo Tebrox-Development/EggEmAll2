@@ -12,7 +12,7 @@ import java.util.List;
 public class EggEmAllPlugin extends SimplePlugin {
 
 	public static List<Egg> thrownEggs = new ArrayList<>();
-	public static SpawnEggs catchableMobs = new SpawnEggs();
+	public static SpawnEggs catchableMobs;
 
 	public static EggEmAllPlugin getInstance() {
 		return (EggEmAllPlugin) SimplePlugin.getInstance();
@@ -22,6 +22,13 @@ public class EggEmAllPlugin extends SimplePlugin {
 	protected void onPluginStart() {
 		Common.setLogPrefix(Settings.LOG_PREFIX);
 		Common.setTellPrefix(Settings.CHAT_PREFIX);
+		catchableMobs = new SpawnEggs();
+
+		Common.log("&6===================== &bEGG EM ALL &6=====================");
+		Common.log("&aCatchable Entities: &f" + catchableMobs.countCatchableEntities());
+		Common.log("&cBlacklisted Entities: &f" + Settings.Restrictions.BLACKLISTED_ENTITIES.size());
+		Common.log((Settings.BlacklistWorlds.AS_WHITELIST ? "&aWhitelisted" : "&cBlacklisted") + " Worlds: &f" + Settings.BlacklistWorlds.WORLDS.size());
+		Common.log("&6======================================================");
 	}
 
 }

@@ -75,9 +75,17 @@ public final class EggListener implements Listener {
 		EntityCaptureEvent entityCaptureEvent = new EntityCaptureEvent(targetEntity, egg);
 		EntityEscapeCaptureEvent entityEscapeEvent = new EntityEscapeCaptureEvent(targetEntity, egg);
 
-
-		if (!EggEmAllPlugin.catchableMobs.isCatchable(targetEntity))
+		if (!Settings.BlacklistWorlds.AS_WHITELIST && Settings.BlacklistWorlds.WORLDS.contains(egg.getWorld().getName())) {
+			if (Settings.Messages.BLACKLISTED_WORLD.length() > 0 && egg.getShooter() instanceof Player player)
+				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.BLACKLISTED_WORLD, targetEntity));
 			return;
+		}
+
+		if (!EggEmAllPlugin.catchableMobs.isCatchable(targetEntity)) {
+			if (Settings.Messages.NOT_CATCHABLE.length() > 0 && egg.getShooter() instanceof Player player)
+				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NOT_CATCHABLE, targetEntity));
+			return;
+		}
 
 		if (Settings.CatchChance.SPAWN_CHICKEN_ON_FAIL)
 			EggEmAllPlugin.thrownEggs.add(egg);
@@ -105,6 +113,13 @@ public final class EggListener implements Listener {
 						Common.tell(player, Settings.Messages.NO_SHEARED_SHEEP);
 					return;
 				}
+
+		if (Settings.Restrictions.PREVENT_CATCHING_NAMED_ENTITIES)
+			if (targetEntity.getCustomName() != null) {
+				if (Settings.Messages.NO_NAMED_ENTITIES.length() > 0 && egg.getShooter() instanceof Player player)
+					Common.tell(player, Settings.Messages.NO_NAMED_ENTITIES);
+				return;
+			}
 
 		EggEmAllPlugin.getInstance().getServer().getPluginManager().callEvent(entityCaptureEvent);
 		if (entityCaptureEvent.isCancelled())

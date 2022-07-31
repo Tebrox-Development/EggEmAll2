@@ -8,21 +8,25 @@ Log_Lag_Over_Millis: 100
 Debug: [ ]
 Command_Aliases: [ eggemall ]
 
+# Blacklist / Whitelist worlds where you would like this plugin to allow
+# or disable entity catching using chicken eggs
 BlacklistWorlds:
   AsWhitelist: false
   Worlds:
-    - Some_Blocked_World
-
+    - blacklisted_world
+# Options relating to particle effects
 Particles:
   EggTrails: true
   PlayerThrowOnly: true
   ExplosionOnSuccess: true
+  # This only happens if CatchChance->RemoveEntityOnFail is set to true
   SmokeOnEscape: true
 
 CatchChance:
-  ChancePercentage: 50
+  ChancePercentage: 100
   SpawnChickenOnFail: true
   RemoveEntityOnFail: true
+  # Only applicable when a player throws the egg
   AddLoreToSpawnEgg: true
 
 Restrictions:
@@ -30,15 +34,37 @@ Restrictions:
   PreventCatchingBabyEntities: true
   PreventCatchingTamedEntities: true
   PreventCatchingShearedSheep: true
+  PreventCatchingNamedEntities: true
   RequirePermissions: true
+  # Which entities do you want to block from being captured?
+  # p.s. you cannot catch an entity that does not have a default spawn egg item
+  EntityBlacklist:
+    - ENDER_DRAGON
+    - WITHER
+    - ELDER_GUARDIAN
+    - WARDEN
+    - EVOKER
+    - VEX
+    - GHAST
+    - SHULKER
+    - RAVAGER
+    - TADPOLE
 
 EntityInventories:
   DeleteInventoryOnCatch: true
 
+GUI:
+  Title: "&9&l&oEgg Em All"
+  CatchableEntitiesTitle: "&2&l&oCatchable Entities"
+  BlacklistedEntitiesTitle: "&c&l&oBlacklisted Entities"
+
 Messages:
   NoPermissions: "Sorry you don't have permission to catch {entity}"
+  NotCatchable: "Sorry, {entity} cannot be caught"
   CatchSuccess: "&2Congrats you got the {entity} spawn egg!"
   CatchFailedChance: "&c&oOh No! &6&oLooks like that {entity} got away. Better luck next time..."
   NoBabies: "Sorry, you cannot catch baby entities"
   NoTamed: "Sorry, you cannot catch tamed entities"
   NoShearedSheep: "Sorry, you cannot catch sheared sheep"
+  NoNamedEntities: "Sorry, you cannot catch named entities"
+  BlacklistedWorld: "Sorry, you cannot catch entities in world: {world}"

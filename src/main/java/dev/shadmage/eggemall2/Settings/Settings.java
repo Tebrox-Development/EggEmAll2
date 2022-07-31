@@ -1,16 +1,22 @@
 package dev.shadmage.eggemall2.Settings;
 
+import org.bukkit.entity.EntityType;
 import org.mineacademy.fo.settings.SimpleSettings;
 
 import java.util.List;
 
 public final class Settings extends SimpleSettings {
 
+	@Override
+	protected boolean saveComments() {
+		return true;
+	}
+
 	public static String LOG_PREFIX;
 	public static String CHAT_PREFIX;
 
 	private static void init() {
-		setPathPrefix("");
+		setPathPrefix(null);
 		LOG_PREFIX = getString("LogPrefix");
 		CHAT_PREFIX = getString("ChatPrefix");
 	}
@@ -67,7 +73,9 @@ public final class Settings extends SimpleSettings {
 		public static Boolean PREVENT_CATCHING_BABIES;
 		public static Boolean PREVENT_CATCHING_TAMED;
 		public static Boolean PREVENT_CATCHING_SHEARED_SHEEP;
+		public static Boolean PREVENT_CATCHING_NAMED_ENTITIES;
 		public static Boolean REQUIRE_PERMISSIONS;
+		public static List<EntityType> BLACKLISTED_ENTITIES;
 
 		private static void init() {
 			setPathPrefix("Restrictions");
@@ -75,7 +83,9 @@ public final class Settings extends SimpleSettings {
 			PREVENT_CATCHING_BABIES = getBoolean("PreventCatchingBabyEntities");
 			PREVENT_CATCHING_TAMED = getBoolean("PreventCatchingTamedEntities");
 			PREVENT_CATCHING_SHEARED_SHEEP = getBoolean("PreventCatchingShearedSheep");
+			PREVENT_CATCHING_NAMED_ENTITIES = getBoolean("PreventCatchingNamedEntities");
 			REQUIRE_PERMISSIONS = getBoolean("RequirePermissions");
+			BLACKLISTED_ENTITIES = getList("EntityBlacklist", EntityType.class);
 		}
 	}
 
@@ -88,6 +98,19 @@ public final class Settings extends SimpleSettings {
 		}
 	}
 
+	public static class GUI {
+		public static String MAIN_TITLE;
+		public static String CATCHABLE_ENTITIES_TITLE;
+		public static String BLACKLISTED_ENTITIES_TITLE;
+
+		private static void init() {
+			setPathPrefix("GUI");
+			MAIN_TITLE = getString("Title");
+			CATCHABLE_ENTITIES_TITLE = getString("CatchableEntitiesTitle");
+			BLACKLISTED_ENTITIES_TITLE = getString("BlacklistedEntitiesTitle");
+		}
+	}
+
 	public static class Messages {
 		public static String NO_PERMISSION;
 		public static String CATCH_SUCCESS;
@@ -95,6 +118,9 @@ public final class Settings extends SimpleSettings {
 		public static String NO_BABIES;
 		public static String NO_TAMED;
 		public static String NO_SHEARED_SHEEP;
+		public static String NO_NAMED_ENTITIES;
+		public static String BLACKLISTED_WORLD;
+		public static String NOT_CATCHABLE;
 
 		private static void init() {
 			setPathPrefix("Messages");
@@ -104,6 +130,9 @@ public final class Settings extends SimpleSettings {
 			NO_BABIES = getString("NoBabies");
 			NO_TAMED = getString("NoTamed");
 			NO_SHEARED_SHEEP = getString("NoShearedSheep");
+			NO_NAMED_ENTITIES = getString("NoNamedEntities");
+			BLACKLISTED_WORLD = getString("BlacklistedWorld");
+			NOT_CATCHABLE = getString("NotCatchable");
 		}
 	}
 }
