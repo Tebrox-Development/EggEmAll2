@@ -2,6 +2,7 @@ package dev.shadmage.eggemall2;
 
 import dev.shadmage.eggemall2.Model.SpawnEggs;
 import dev.shadmage.eggemall2.Settings.Settings;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.entity.Egg;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -20,10 +21,14 @@ public class EggEmAllPlugin extends SimplePlugin {
 
 	@Override
 	protected void onPluginStart() {
+		//enable bstats
+		int pluginId = 15978; // <-- Replace with the id of your plugin!
+		Metrics metrics = new Metrics(this, pluginId);
+		//set logging & chat prefixes
 		Common.setLogPrefix(Settings.LOG_PREFIX);
 		Common.setTellPrefix(Settings.CHAT_PREFIX);
 		catchableMobs = new SpawnEggs();
-
+		//print plugin loaded summary to console
 		Common.log("&6===================== &bEGG EM ALL &6=====================");
 		Common.log("&aCatchable Entities: &f" + catchableMobs.countCatchableEntities());
 		Common.log("&cBlacklisted Entities: &f" + Settings.Restrictions.BLACKLISTED_ENTITIES.size());
