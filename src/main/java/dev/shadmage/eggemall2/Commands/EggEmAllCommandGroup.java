@@ -10,6 +10,7 @@ public final class EggEmAllCommandGroup extends SimpleCommandGroup {
 	@Override
 	protected void registerSubcommands() {
 		registerSubcommand(new GUICommand(this));
+		registerSubcommand(new ReloadCommand(this));
 	}
 
 	@Override

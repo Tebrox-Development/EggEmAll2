@@ -3,7 +3,7 @@
 EggEmAll2 is a plugin which allows players to 'capture' other entities and get their spawn eggs, by throwing chicken
 eggs at them
 
-#### There are 5 permissions for this plugin
+#### There are 6 permissions for this plugin
 
 - eggemall.all ```grant all permissions below```
 - eggemall.villagers ```Allows catching Villager type entities```
@@ -11,6 +11,7 @@ eggs at them
 - eggemall.passive ```Allows catching Animals```
 - eggemall.unknown
   ```If an entity wasn't grouped in the above it will require this permission, in theory it should not happen```
+- eggemall.admin ```reload the plugin```
 
 #### Commands:
 
