@@ -8,7 +8,6 @@ import org.mineacademy.fo.settings.SimpleLocalization;
 public final class ReloadCommand extends SimpleSubCommand {
 	ReloadCommand(final SimpleCommandGroup parent) {
 		super(parent, "reload");
-		setPermission("eggemall.admin");
 		setDescription("Reload the EggEmAll Plugin");
 	}
 

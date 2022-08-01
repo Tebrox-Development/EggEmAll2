@@ -5,13 +5,14 @@ eggs at them
 
 #### There are 6 permissions for this plugin
 
+- eggemall.command.reload ```reload the plugin```
+- eggemall.command.menu ```open the gui menu to view catchable/blacklisted entities```
 - eggemall.all ```grant all permissions below```
 - eggemall.villagers ```Allows catching Villager type entities```
 - eggemall.aggressive ```Allows catching Monsters```
 - eggemall.passive ```Allows catching Animals```
 - eggemall.unknown
   ```If an entity wasn't grouped in the above it will require this permission, in theory it should not happen```
-- eggemall.admin ```reload the plugin```
 
 #### Commands:
 
