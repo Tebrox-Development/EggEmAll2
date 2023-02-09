@@ -10,7 +10,7 @@
     <groupId>dev.shadmage</groupId>
     <artifactId>eggemall</artifactId>
     <name>EggEmAll2</name>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -18,13 +18,13 @@
         <!-- The full path to your plugin's main class, so that Spigot can find and load it -->
         <main.class>dev.shadmage.eggemall2.EggEmAllPlugin</main.class>
         <!-- ======================================================================================================= -->
-        <foundation.version>6.0.8</foundation.version> <!-- https://github.com/kangarko/Foundation/releases -->
+        <foundation.version>6.2.9</foundation.version> <!-- https://github.com/kangarko/Foundation/releases -->
         <foundation.path>com.github.kangarko</foundation.path>
         <mavencompiler.version>3.10.1
         </mavencompiler.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
         <mavenshade.version>3.3.1-SNAPSHOT
         </mavenshade.version> <!-- https://repository.apache.org/content/repositories/snapshots/org/apache/maven/plugins/maven-shade-plugin/ -->
-        <mavenjarplugin.version>3.2.2
+        <mavenjarplugin.version>3.3.0
         </mavenjarplugin.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
