@@ -75,7 +75,7 @@ public class EggEmAllGUI extends Menu {
 
 		@Override
 		protected ItemStack convertToItemStack(EntityType entityType) {
-			return ItemCreator.of(CompMaterial.makeMonsterEgg(entityType), ItemUtil.bountifyCapitalized(entityType)).make();
+			return ItemCreator.ofEgg(entityType, ItemUtil.bountifyCapitalized(entityType)).make();
 		}
 
 		@Override
@@ -99,7 +99,7 @@ public class EggEmAllGUI extends Menu {
 
 		@Override
 		protected ItemStack convertToItemStack(EntityType entityType) {
-			return ItemCreator.of(CompMaterial.makeMonsterEgg(entityType), ItemUtil.bountifyCapitalized(entityType)).make();
+			return ItemCreator.ofEgg(entityType, ItemUtil.bountifyCapitalized(entityType)).make();
 		}
 
 		@Override

@@ -1,6 +1,7 @@
 package dev.shadmage.eggemall2.Settings;
 
 import org.bukkit.entity.EntityType;
+import org.mineacademy.fo.Common;
 import org.mineacademy.fo.settings.SimpleSettings;
 
 import java.util.List;
@@ -61,7 +62,7 @@ public final class Settings extends SimpleSettings {
 
 		private static void init() {
 			setPathPrefix("CatchChance");
-			CHANCE_PERCENTAGE = getInteger("ChancePercentage", 100);
+			CHANCE_PERCENTAGE = Common.getOrDefault(getInteger("ChancePercentage"), 100);
 			SPAWN_CHICKEN_ON_FAIL = getBoolean("SpawnChickenOnFail");
 			REMOVE_ENTITY_ON_FAIL_CHANCE = getBoolean("RemoveEntityOnFail");
 			ADD_LORE_TO_EGG = getBoolean("AddLoreToSpawnEgg");

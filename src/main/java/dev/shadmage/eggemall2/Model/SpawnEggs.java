@@ -19,7 +19,10 @@ public final class SpawnEggs {
 
 	public SpawnEggs() {
 		CatchableEntities = Arrays.stream(EntityType.values()).filter(
-				entityType -> entityType.isSpawnable() && !(Settings.Restrictions.BLACKLISTED_ENTITIES.contains(entityType)) && entityType.isAlive() && (entityType == EntityType.SHEEP || CompMaterial.makeMonsterEgg(entityType) != CompMaterial.SHEEP_SPAWN_EGG)
+				entityType ->
+						entityType.isSpawnable()
+								&& !(Settings.Restrictions.BLACKLISTED_ENTITIES.contains(entityType))
+								&& entityType.isAlive()
 		).collect(Collectors.toList());
 	}
 
@@ -34,7 +37,7 @@ public final class SpawnEggs {
 	public ItemStack getSpawnEgg(Entity entity) {
 		EntityType entityType = entity.getType();
 		if (CatchableEntities.contains(entityType) && !Settings.Restrictions.BLACKLISTED_ENTITIES.contains(entityType)) {
-			return ItemCreator.of(CompMaterial.makeMonsterEgg(entityType)).make();
+			return ItemCreator.ofEgg(entityType).make();
 		} else {
 			return ItemCreator.of(CompMaterial.EGG).make();
 		}

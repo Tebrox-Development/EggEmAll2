@@ -5,8 +5,9 @@ import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mineacademy.fo.command.SimpleSubCommand;
 
 public final class GUICommand extends SimpleSubCommand {
-	GUICommand(final SimpleCommandGroup parent) {
+	public GUICommand(final SimpleCommandGroup parent) {
 		super(parent, "menu");
+		setName("menu");
 		setDescription("Show details about this plugin");
 	}
 
