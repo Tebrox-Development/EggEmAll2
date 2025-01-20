@@ -13,6 +13,6 @@ public final class EggEmAllCommandGroup extends SimpleCommandGroup {
 
 	@Override
 	protected String getCredits() {
-		return "&bVisit &dhttps://dirtydoggaming.co.za";
+		return "&bVisit &dhttps://dirtydogsa.co.za";
 	}
 }

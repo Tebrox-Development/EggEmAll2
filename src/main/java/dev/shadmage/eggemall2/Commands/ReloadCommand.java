@@ -9,6 +9,7 @@ public final class ReloadCommand extends SimpleSubCommand {
 	ReloadCommand(final SimpleCommandGroup parent) {
 		super(parent, "reload");
 		setDescription("Reload the EggEmAll Plugin");
+		setPermission("eggemall.command.reload");
 	}
 
 	@Override

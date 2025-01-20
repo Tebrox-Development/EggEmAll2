@@ -9,6 +9,7 @@ public final class GUICommand extends SimpleSubCommand {
 		super(parent, "menu");
 		setName("menu");
 		setDescription("Show details about this plugin");
+		setPermission("eggemall.command.gui");
 	}
 
 	@Override
