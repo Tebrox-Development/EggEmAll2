@@ -18,4 +18,8 @@ eggs at them
 
 - /eggemall menu ```Opens a GUI where players can see catchable & blacklisted mobs```
 
-## -NB- This is __NOT__ a drop in replacement for the original plugin*
+## v2.0.1 Published to SpigotMC
+
+https://www.spigotmc.org/resources/eggemall.122056/
+
+https://bstats.org/plugin/bukkit/EggEmAll2/15978
