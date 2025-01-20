@@ -69,6 +69,15 @@ public final class Settings extends SimpleSettings {
 		}
 	}
 
+	public static class NBT {
+		public static Boolean MAINTAIN_ENTITY_DATA;
+
+		private static void init() {
+			setPathPrefix("NBT");
+			MAINTAIN_ENTITY_DATA = getBoolean("MaintainEntityDataValues");
+		}
+	}
+
 	public static class Restrictions {
 		public static Boolean ONLY_ALLOW_PLAYER_THROWN_EGGS;
 		public static Boolean PREVENT_CATCHING_BABIES;

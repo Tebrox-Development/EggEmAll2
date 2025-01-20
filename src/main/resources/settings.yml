@@ -1,6 +1,6 @@
-#
-# Dirty Dog Gaming EggEmAll 2
-#
+# !-----------------------------------------------------------------------------------------------!
+#                       Welcome to the main configuration of ${project.name}
+# !-----------------------------------------------------------------------------------------------!
 Version: 1
 LogPrefix: "&8[&aEggEmAll&8]"
 ChatPrefix: "&8[&aEggEmAll&8]"
@@ -52,6 +52,10 @@ Restrictions:
 
 EntityInventories:
   DeleteInventoryOnCatch: true
+
+# Save entity meta data
+NBT:
+  MaintainEntityDataValues: true
 
 GUI:
   Title: "&9&l&oEgg Em All"

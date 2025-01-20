@@ -5,22 +5,31 @@ import dev.shadmage.eggemall2.CustomEvents.EntityEscapeCaptureEvent;
 import dev.shadmage.eggemall2.EggEmAllPlugin;
 import dev.shadmage.eggemall2.Settings.Settings;
 import dev.shadmage.eggemall2.Utils.ProcessPlaceholderMessages;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerEggThrowEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.PlayerUtil;
 import org.mineacademy.fo.RandomUtil;
 import org.mineacademy.fo.annotation.AutoRegister;
+import org.mineacademy.fo.remain.CompMaterial;
 import org.mineacademy.fo.remain.CompParticle;
 
 import java.util.Arrays;
@@ -28,6 +37,7 @@ import java.util.List;
 
 @AutoRegister
 public final class EggListener implements Listener {
+	private static final NamespacedKey EGGEMALL_ENTITY_DATA = new NamespacedKey(EggEmAllPlugin.getInstance(), "EGGEMALL_ENTITY_DATA");
 
 	@EventHandler
 	public void onPlayerEggThrow(PlayerEggThrowEvent event) {
@@ -151,8 +161,6 @@ public final class EggListener implements Listener {
 			}
 		}
 
-		targetEntity.remove();
-
 		if (Settings.Particles.EXPLOSION_ON_SUCCESS) {
 			CompParticle.EXPLOSION_LARGE.spawn(targetEntity.getLocation());
 		}
@@ -168,12 +176,17 @@ public final class EggListener implements Listener {
 			}
 		}
 
+		String entitySnapshot = targetEntity.createSnapshot().getAsString();
+		targetEntity.remove();
+
 		if (egg.getShooter() instanceof Player player && Settings.CatchChance.ADD_LORE_TO_EGG) {
 			String playerName = player.getName();
 			ItemMeta meta = eggStack.getItemMeta();
 			List<String> newLore = Arrays.asList("", ChatColor.translateAlternateColorCodes('&', "&9Captured by: &e&l" + playerName));
 			assert meta != null;
 			meta.setLore(newLore);
+			if (Settings.NBT.MAINTAIN_ENTITY_DATA)
+				meta.getPersistentDataContainer().set(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING, entitySnapshot);
 			eggStack.setItemMeta(meta);
 		}
 
@@ -190,6 +203,25 @@ public final class EggListener implements Listener {
 			event.getEntity().remove();
 			if (Settings.Particles.SMOKE_ON_ESCAPE) {
 				CompParticle.SMOKE_LARGE.spawn(event.getEntity().getLocation());
+			}
+		}
+	}
+
+	@EventHandler
+	public void itemuse(PlayerInteractEvent e) {
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getItem() != null) {
+			ItemStack item = e.getItem();
+			if (CompMaterial.isMonsterEgg(item.getType()) && Settings.NBT.MAINTAIN_ENTITY_DATA) {
+				if (item.getPersistentDataContainer().has(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING)) {
+					String snapshotString = item.getPersistentDataContainer().get(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING);
+					EntitySnapshot snapshot = Bukkit.getEntityFactory().createEntitySnapshot(snapshotString);
+					Location loc = e.getClickedBlock().getLocation().clone().add(0.5, 1, 0.5);
+					while (!CompMaterial.isAir(loc.getBlock()) && !CompMaterial.isAir(loc.getBlock().getRelative(BlockFace.UP)))
+						loc = loc.add(0, 1, 0);
+					snapshot.createEntity(loc);
+					PlayerUtil.takeOnePiece(e.getPlayer(), item);
+					e.setCancelled(true);
+				}
 			}
 		}
 	}
