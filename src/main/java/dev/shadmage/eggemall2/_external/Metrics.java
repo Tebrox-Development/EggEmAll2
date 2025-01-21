@@ -1,4 +1,4 @@
-package dev.shadmage.eggemall2.bstats;
+package dev.shadmage.eggemall2._external;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

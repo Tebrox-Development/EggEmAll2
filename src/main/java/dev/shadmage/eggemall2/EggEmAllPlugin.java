@@ -2,7 +2,8 @@ package dev.shadmage.eggemall2;
 
 import dev.shadmage.eggemall2.Model.SpawnEggs;
 import dev.shadmage.eggemall2.Settings.Settings;
-import dev.shadmage.eggemall2.bstats.Metrics;
+import dev.shadmage.eggemall2._external.Metrics;
+import dev.shadmage.eggemall2._external.SpigotUpdateChecker;
 import org.bukkit.entity.Egg;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -22,6 +23,9 @@ public class EggEmAllPlugin extends SimplePlugin {
 	protected void onPluginStart() {
 		//enable bstats
 		Metrics metrics = new Metrics(this, 15978);
+		//check for plugin updates on SpigotMC
+		SpigotUpdateChecker spigotUpdateChecker = new SpigotUpdateChecker(this, 122056);
+
 		//set logging & chat prefixes
 		Common.setLogPrefix(Settings.LOG_PREFIX);
 		Common.setTellPrefix(Settings.CHAT_PREFIX);
