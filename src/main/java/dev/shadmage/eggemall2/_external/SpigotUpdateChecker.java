@@ -44,6 +44,8 @@ public class SpigotUpdateChecker {
 						"",
 						"&6Please update your plugin",
 						"&7 - &e" + SPIGOT_DOWNLOAD_LINK + this.resourceId);
+			} else {
+				Common.log("&aYou are running the latest release.");
 			}
 		});
 	}
