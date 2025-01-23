@@ -1,5 +1,6 @@
 package dev.shadmage.eggemall2.Model;
 
+import dev.shadmage.eggemall2.Settings.PermissionData;
 import dev.shadmage.eggemall2.Settings.Settings;
 import org.bukkit.entity.AbstractVillager;
 import org.bukkit.entity.Entity;
@@ -44,17 +45,15 @@ public final class SpawnEggs {
 	}
 
 	public String getCatchPermission(Entity entity) {
-		String perm = "eggemall.";
 		if (entity instanceof AbstractVillager) {
-			perm += "villagers";
+			return PermissionData.CATCH_VILLAGERS;
 		} else if (EntityUtil.isAggressive(entity)) {
-			perm += "aggressive";
+			return PermissionData.CATCH_AGGRESSIVE;
 		} else if (EntityUtil.isCreature(entity)) {
-			perm += "passive";
+			return PermissionData.CATCH_PASSIVE;
 		} else {
-			perm += "unknown";
+			return PermissionData.CATCH_UNKNOWN;
 		}
-		return perm;
 	}
 
 	public int countCatchableEntities() {

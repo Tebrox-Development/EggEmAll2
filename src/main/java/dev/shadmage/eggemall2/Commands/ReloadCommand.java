@@ -1,5 +1,6 @@
 package dev.shadmage.eggemall2.Commands;
 
+import dev.shadmage.eggemall2.Settings.PermissionData;
 import org.mineacademy.fo.command.SimpleCommandGroup;
 import org.mineacademy.fo.command.SimpleSubCommand;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -9,7 +10,7 @@ public final class ReloadCommand extends SimpleSubCommand {
 	ReloadCommand(final SimpleCommandGroup parent) {
 		super(parent, "reload");
 		setDescription("Reload the EggEmAll Plugin");
-		setPermission("eggemall.command.reload");
+		setPermission(PermissionData.RELOAD_COMMAND);
 	}
 
 	@Override

@@ -21,9 +21,7 @@ public class EggEmAllPlugin extends SimplePlugin {
 
 	@Override
 	protected void onPluginStart() {
-		//enable bstats
 		Metrics metrics = new Metrics(this, 15978);
-		//check for plugin updates on SpigotMC
 		SpigotUpdateChecker spigotUpdateChecker = new SpigotUpdateChecker(this, 122056);
 
 		//set logging & chat prefixes

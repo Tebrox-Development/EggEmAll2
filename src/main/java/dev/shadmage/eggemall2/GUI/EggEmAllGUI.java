@@ -38,15 +38,6 @@ public class EggEmAllGUI extends Menu {
 				"",
 				"Click to see all",
 				"blacklisted entities");
-/*
-		this.worldsButton = new ButtonConversation(
-				new ExpPrompt(),
-				CompMaterial.EXPERIENCE_BOTTLE,
-				"Get more levels quickly",
-				"",
-				"You can add as many",
-				"exp levels as you need");
-*/
 	}
 
 	@Override
