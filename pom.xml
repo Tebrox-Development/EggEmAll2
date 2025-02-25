@@ -18,14 +18,15 @@
         <!-- The full path to your plugin's main class, so that Spigot can find and load it -->
         <main.class>dev.shadmage.eggemall2.EggEmAllPlugin</main.class>
         <!-- ======================================================================================================= -->
-        <foundation.version>6.9.17</foundation.version> <!-- https://github.com/kangarko/Foundation/releases -->
+        <foundation.version>6.9.18</foundation.version>
+        <!-- https://github.com/kangarko/Foundation/releases -->
         <foundation.path>com.github.kangarko</foundation.path>
-        <mavencompiler.version>3.13.0
-        </mavencompiler.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <mavenshade.version>3.6.0
-        </mavenshade.version> <!-- https://repository.apache.org/content/repositories/snapshots/org/apache/maven/plugins/maven-shade-plugin/ -->
-        <mavenjarplugin.version>3.4.2
-        </mavenjarplugin.version> <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+        <mavencompiler.version>3.13.0</mavencompiler.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <mavenshade.version>3.6.0</mavenshade.version>
+        <!-- https://repository.apache.org/content/repositories/snapshots/org/apache/maven/plugins/maven-shade-plugin/ -->
+        <mavenjarplugin.version>3.4.2</mavenjarplugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
     </properties>
