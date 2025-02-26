@@ -32,12 +32,14 @@ public class EggEmAllPlugin extends SimplePlugin {
 	@Override
 	protected void onReloadablesStart() {
 		catchableMobs = new SpawnEggs();
-		//print plugin loaded summary to console
-		Common.log("&6===================== &bEGG EM ALL &6=====================");
-		Common.log("&aCatchable Entities: &f" + catchableMobs.countCatchableEntities());
-		Common.log("&cBlacklisted Entities: &f" + Settings.Restrictions.BLACKLISTED_ENTITIES.size());
-		Common.log((Settings.BlacklistWorlds.AS_WHITELIST ? "&aWhitelisted" : "&cBlacklisted") + " Worlds: &f" + Settings.BlacklistWorlds.WORLDS.size());
-		Common.log("&6======================================================");
+		if (Settings.General.STARTUP_CONSOLE_STATS) {
+			//print plugin loaded summary to console
+			Common.log("&6===================== &bEGG EM ALL &6=====================");
+			Common.log("&aCatchable Entities: &f" + catchableMobs.countCatchableEntities());
+			Common.log("&cBlacklisted Entities: &f" + Settings.Restrictions.BLACKLISTED_ENTITIES.size());
+			Common.log((Settings.BlacklistWorlds.AS_WHITELIST ? "&aWhitelisted" : "&cBlacklisted") + " Worlds: &f" + Settings.BlacklistWorlds.WORLDS.size());
+			Common.log("&6======================================================");
+		}
 	}
 
 }

@@ -59,6 +59,7 @@ public final class Settings extends SimpleSettings {
 		public static Boolean SPAWN_CHICKEN_ON_FAIL;
 		public static Boolean REMOVE_ENTITY_ON_FAIL_CHANCE;
 		public static Boolean ADD_LORE_TO_EGG;
+		public static List<String> LORE_LINES;
 
 		private static void init() {
 			setPathPrefix("CatchChance");
@@ -66,6 +67,7 @@ public final class Settings extends SimpleSettings {
 			SPAWN_CHICKEN_ON_FAIL = getBoolean("SpawnChickenOnFail");
 			REMOVE_ENTITY_ON_FAIL_CHANCE = getBoolean("RemoveEntityOnFail");
 			ADD_LORE_TO_EGG = getBoolean("AddLoreToSpawnEgg");
+			LORE_LINES = getList("Lore_Lines", String.class);
 		}
 	}
 
@@ -105,6 +107,16 @@ public final class Settings extends SimpleSettings {
 		private static void init() {
 			setPathPrefix("EntityInventories");
 			ERASE_ENTITY_INVENTORY = getBoolean("DeleteInventoryOnCatch");
+		}
+	}
+
+	public static class General {
+		public static Boolean STARTUP_CONSOLE_STATS;
+		;
+
+		private static void init() {
+			setPathPrefix("General");
+			STARTUP_CONSOLE_STATS = getBoolean("StartupConsoleStats");
 		}
 	}
 

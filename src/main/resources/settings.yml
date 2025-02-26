@@ -28,6 +28,14 @@ CatchChance:
   RemoveEntityOnFail: true
   # Only applicable when a player throws the egg
   AddLoreToSpawnEgg: true
+  # Supports placeholders
+  # -> {player} = Name of the player that caught the mob
+  # -> {entity} = The type of entity
+  # -> {entity_name} = The name of the mob if it had a custom name, or the entity type/profession if not
+  # -> {profession} = if the mob is a villager with a profession, if not or no profession will be blank
+  Lore_Lines:
+    - '&9{entity_name}'
+    - '&9Captured by: &e&l{player}'
 
 Restrictions:
   OnlyAllowPlayerThrownEggs: true
@@ -72,3 +80,7 @@ Messages:
   NoShearedSheep: "Sorry, you cannot catch sheared sheep"
   NoNamedEntities: "Sorry, you cannot catch named entities"
   BlacklistedWorld: "Sorry, you cannot catch entities in world: {world}"
+
+General:
+  # On server start/plugin reload show plugin details in the console
+  StartupConsoleStats: true

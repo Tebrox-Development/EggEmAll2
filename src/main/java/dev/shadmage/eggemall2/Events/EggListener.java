@@ -6,7 +6,6 @@ import dev.shadmage.eggemall2.EggEmAllPlugin;
 import dev.shadmage.eggemall2.Settings.Settings;
 import dev.shadmage.eggemall2.Utils.ProcessPlaceholderMessages;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.BlockFace;
@@ -26,13 +25,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
+import org.mineacademy.fo.ItemUtil;
 import org.mineacademy.fo.PlayerUtil;
 import org.mineacademy.fo.RandomUtil;
 import org.mineacademy.fo.annotation.AutoRegister;
 import org.mineacademy.fo.remain.CompMaterial;
 import org.mineacademy.fo.remain.CompParticle;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @AutoRegister
@@ -177,24 +177,43 @@ public final class EggListener implements Listener {
 		}
 
 		String entitySnapshot = targetEntity.createSnapshot().getAsString();
-		targetEntity.remove();
-
-		if (egg.getShooter() instanceof Player player && Settings.CatchChance.ADD_LORE_TO_EGG) {
-			String playerName = player.getName();
-			ItemMeta meta = eggStack.getItemMeta();
-			List<String> newLore = Arrays.asList("", ChatColor.translateAlternateColorCodes('&', "&9Captured by: &e&l" + playerName));
-			assert meta != null;
-			meta.setLore(newLore);
+		ItemMeta meta = eggStack.getItemMeta();
+		if (meta != null) {
+			if (egg.getShooter() instanceof Player player && Settings.CatchChance.ADD_LORE_TO_EGG) {
+				List<String> newLore = replacePlaceholders(Settings.CatchChance.LORE_LINES, targetEntity, player);
+				meta.setLore(newLore);
+			}
 			if (Settings.NBT.MAINTAIN_ENTITY_DATA)
 				meta.getPersistentDataContainer().set(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING, entitySnapshot);
 			eggStack.setItemMeta(meta);
 		}
+		targetEntity.remove();
 
 		targetEntity.getWorld().dropItem(targetEntity.getLocation(), eggStack);
 
 		if (!EggEmAllPlugin.thrownEggs.contains(egg)) {
 			EggEmAllPlugin.thrownEggs.add(egg);
 		}
+	}
+
+	private List<String> replacePlaceholders(List<String> loreLines, Entity entity, Player player) {
+		List<String> newLore = new ArrayList<>();
+		for (String line : loreLines) {
+			line = line.replace("{entity_name}", entity.getName());
+			line = line.replace("{entity}", ItemUtil.bountifyCapitalized(entity.getType().toString()));
+			line = line.replace("{player}", player.getName());
+			if (entity instanceof Villager villager) {
+				if (villager.getProfession() != Villager.Profession.NONE) {
+					line = line.replace("{profession}", ItemUtil.bountifyCapitalized(villager.getProfession().toString()));
+				} else {
+					line = line.replace("{profession}", "");
+				}
+			} else
+				line = line.replace("{profession}", "");
+			newLore.add(Common.colorize(line));
+		}
+
+		return newLore;
 	}
 
 	@EventHandler
