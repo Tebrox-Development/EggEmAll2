@@ -10,7 +10,7 @@
     <groupId>dev.shadmage</groupId>
     <artifactId>eggemall</artifactId>
     <name>EggEmAll2</name>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -18,7 +18,7 @@
         <!-- The full path to your plugin's main class, so that Spigot can find and load it -->
         <main.class>dev.shadmage.eggemall2.EggEmAllPlugin</main.class>
         <!-- ======================================================================================================= -->
-        <foundation.version>6.9.18</foundation.version>
+        <foundation.version>6.9.19</foundation.version>
         <!-- https://github.com/kangarko/Foundation/releases -->
         <foundation.path>com.github.kangarko</foundation.path>
         <mavencompiler.version>3.13.0</mavencompiler.version>
