@@ -4,8 +4,9 @@ import dev.shadmage.eggemall2.Model.SpawnEggs;
 import dev.shadmage.eggemall2.Settings.Settings;
 import dev.shadmage.eggemall2._external.Metrics;
 import dev.shadmage.eggemall2._external.SpigotUpdateChecker;
-import dev.shadmage.eggemall2._external.StackingPlugins.RoseStacker.RoseStackerSupport;
+import dev.shadmage.eggemall2._external.StackingPlugins.RoseStackerSupport;
 import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
+import dev.shadmage.eggemall2._external.StackingPlugins.UltimateStackerSupport;
 import lombok.Getter;
 import org.bukkit.entity.Egg;
 import org.mineacademy.fo.Common;
@@ -39,7 +40,10 @@ public class EggEmAllPlugin extends SimplePlugin {
 		RoseStackerSupport rsSupport = new RoseStackerSupport();
 		if (rsSupport.isStackingPluginLoaded()) {
 			stackingPlugin = rsSupport;
-			Common.log("&aRoseStacker detected! &fEgg em All will work with RoseStacker!");
+			Common.log("&6RoseStacker detected! &fEgg em All will work with RoseStacker!");
+		} else if (Common.doesPluginExist("UltimateStacker")) {
+			stackingPlugin = new UltimateStackerSupport();
+			Common.log("&6UltimateStacker detected! &fEgg em All will work with UltimateStacker!");
 		} else
 			stackingPlugin = null;
 	}

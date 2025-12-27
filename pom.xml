@@ -20,6 +20,8 @@
         <!-- ======================================================================================================= -->
         <rosestacker.version>1.5.37</rosestacker.version>
         <!-- https://repo.rosewooddev.io/#browse/browse:public:dev%2Frosewood%2Frosestacker -->
+        <ultimatestacker.version>1.0.0-SNAPSHOT</ultimatestacker.version>
+        <!-- https://wiki.songoda.com/UltimateStacker-1130f10897028113b164c9beceb03a30 -->
         <foundation.version>6.9.22</foundation.version>
         <!-- https://github.com/kangarko/Foundation/releases -->
         <foundation.path>com.github.kangarko</foundation.path>
@@ -42,6 +44,10 @@
             <id>rosewood-repo</id>
             <url>https://repo.rosewooddev.io/repository/public/</url>
         </repository>
+        <repository>
+            <id>songoda-minecraft-plugins</id>
+            <url>https://repo.songoda.com/repository/minecraft-plugins/</url>
+        </repository>
     </repositories>
 
     <pluginRepositories>
@@ -61,7 +67,13 @@
             <groupId>dev.rosewood</groupId>
             <artifactId>rosestacker</artifactId>
             <version>${rosestacker.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.songoda</groupId>
+            <artifactId>UltimateStacker-API</artifactId>
+            <version>${ultimatestacker.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

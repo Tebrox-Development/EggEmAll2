@@ -1,10 +1,9 @@
-package dev.shadmage.eggemall2._external.StackingPlugins.RoseStacker;
+package dev.shadmage.eggemall2._external.StackingPlugins;
 
 import dev.rosewood.rosestacker.RoseStacker;
 import dev.rosewood.rosestacker.api.RoseStackerAPI;
 import dev.rosewood.rosestacker.manager.StackManager;
 import dev.rosewood.rosestacker.stack.StackedEntity;
-import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.mineacademy.fo.Common;
