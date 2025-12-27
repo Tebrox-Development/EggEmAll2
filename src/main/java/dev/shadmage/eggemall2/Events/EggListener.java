@@ -5,6 +5,7 @@ import dev.shadmage.eggemall2.CustomEvents.EntityEscapeCaptureEvent;
 import dev.shadmage.eggemall2.EggEmAllPlugin;
 import dev.shadmage.eggemall2.Settings.Settings;
 import dev.shadmage.eggemall2.Utils.ProcessPlaceholderMessages;
+import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -187,7 +188,12 @@ public final class EggListener implements Listener {
 				meta.getPersistentDataContainer().set(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING, entitySnapshot);
 			eggStack.setItemMeta(meta);
 		}
-		targetEntity.remove();
+
+		// Check if we have an active stacker plugin that we support
+		StackingPluginAPI stackerPluginAPI = EggEmAllPlugin.getInstance().getStackingPlugin();
+		if (!(stackerPluginAPI != null && stackerPluginAPI.isStackedEntity(targetEntity) && stackerPluginAPI.unstackEntity(targetEntity))) {
+			targetEntity.remove();
+		}
 
 		targetEntity.getWorld().dropItem(targetEntity.getLocation(), eggStack);
 
