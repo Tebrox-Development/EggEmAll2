@@ -77,6 +77,10 @@ public final class EggListener implements Listener {
 	public void onEntityHitByEgg(EntityDamageEvent event) {
 		Common.setTellPrefix(Settings.CHAT_PREFIX);
 		Entity targetEntity = event.getEntity();
+
+		String groupPermission = EggEmAllPlugin.catchableMobs.getCatchPermission(targetEntity);
+		String mobSpecificPermission = "eggemall.catchmob." + targetEntity.getName();
+
 		if (!(event instanceof EntityDamageByEntityEvent damageEvent))
 			return;
 
@@ -145,7 +149,7 @@ public final class EggListener implements Listener {
 			}
 		} else {
 			if (Settings.Restrictions.REQUIRE_PERMISSIONS)
-				if (!player.hasPermission(EggEmAllPlugin.catchableMobs.getCatchPermission(targetEntity))) {
+				if (!(player.hasPermission(groupPermission) || player.hasPermission(mobSpecificPermission))) {
 					if (Settings.Messages.NO_PERMISSION.length() > 0)
 						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_PERMISSION, targetEntity));
 					return;
