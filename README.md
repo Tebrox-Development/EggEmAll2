@@ -34,6 +34,12 @@ See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation st
 - `/eggemall menu` - opens the GUI with catchable and blacklisted mobs
 - `/eggemall reload` - reloads the plugin configuration
 
+## Dependencies and attribution
+
+EggEmAll2 uses [MineAcademy Foundation](https://github.com/kangarko/Foundation), which is bundled into the plugin JAR and relocated into EggEmAll2's own package. Foundation remains the work of MineAcademy and is not claimed as part of EggEmAll2.
+
+Optional runtime integrations are provided for RoseStacker and UltimateStacker when those plugins are installed.
+
 ## Original project
 
 - Upstream repository: https://github.com/Dirty-Dog-Gaming/EggEmAll2
