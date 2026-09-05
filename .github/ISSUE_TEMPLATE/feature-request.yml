@@ -1,0 +1,68 @@
+name: ✨ Feature request
+description: Suggest an improvement or new capability for EggEmAll2.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement to EggEmAll2.
+        Please keep each issue focused on one feature so it can be discussed and tracked clearly.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / use case
+      description: What problem would this feature solve, or what use case would it enable?
+      placeholder: Describe the situation and why the current behaviour is limiting.
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe how you would like EggEmAll2 to behave.
+      placeholder: Explain the requested behaviour from a server owner or player perspective.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: compatibility-impact
+    attributes:
+      label: Compatibility impact
+      description: Does the request appear to affect a specific compatibility area?
+      options:
+        - No known impact
+        - Paper
+        - Spigot
+        - Older Minecraft versions
+        - Stacking plugins
+        - Unsure
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Are there existing workarounds, config options, commands, or other plugins that partly solve this already?
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add examples, screenshots, mockups, links, or other details that help explain the request.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Checks
+      options:
+        - label: This issue contains one focused feature request.
+          required: true
+        - label: I have checked for an existing issue requesting the same feature.
+          required: true

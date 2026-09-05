@@ -1,0 +1,91 @@
+name: 🐛 Bug report
+description: Report a reproducible problem with EggEmAll2.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem with EggEmAll2.
+        Please provide exact version information and clear reproduction steps so the issue can be reproduced reliably.
+
+  - type: dropdown
+    attributes:
+      label: Bug category
+      description: Which area best describes the problem?
+      options:
+        - Startup / loading
+        - Mob capture
+        - Spawn egg / restoring entity
+        - Entity data / NBT
+        - Permissions
+        - Configuration / world restrictions
+        - Paper / Spigot compatibility
+        - RoseStacker / UltimateStacker integration
+        - Performance
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Environment
+      description: Provide the exact server and plugin environment used to reproduce the problem.
+      placeholder: |
+        Server software: Paper / Spigot / Purpur / Other
+        Minecraft version: 26.2 / 1.21.7 / ...
+        Server build/version: ...
+        Java version: ...
+        EggEmAll2 version/snapshot/commit: ...
+        Stacking plugin: None / RoseStacker / UltimateStacker / Other
+        Relevant other plugins: ...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Bug description
+      description: Briefly describe the problem.
+      placeholder: Describe what is going wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      description: Provide clear step-by-step instructions that reliably trigger the problem.
+      placeholder: |
+        1. Start the server with ...
+        2. Spawn ...
+        3. Throw ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behaviour
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual behaviour
+      description: What happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Logs, configuration, and additional context
+      description: Paste relevant logs or config sections, or attach files, screenshots, videos, and links. Remove secrets or private information.
+    validations:
+      required: false
+
+  - type: checkboxes
+    attributes:
+      label: Checks
+      options:
+        - label: I have included exact version information.
+          required: true
+        - label: I have checked for an existing issue describing the same problem.
+          required: true
