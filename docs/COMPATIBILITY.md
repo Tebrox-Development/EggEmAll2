@@ -12,13 +12,13 @@ This distinction is intentional: the build environment can move forward without 
 
 | Runtime | Status |
 | --- | --- |
-| Paper 26.2 | Primary target; compile/API validation enabled, runtime smoke still required |
+| Paper 26.2 build 121 | Primary target; compile/API verification is green, automated startup smoke enabled |
 | Paper 26.1 | Compatibility intended; runtime validation pending |
-| Paper 1.21.7 | Backward-compatibility compile gate enabled; runtime validation still required |
+| Paper 1.21.7 | Backward-compatibility compile/API verification is green; runtime validation still pending |
 | Other Paper / Spigot 1.21.x | Best-effort compatibility; not claimed until explicitly tested |
 | Older than 1.21 | Not a maintenance target for this fork unless compatibility comes for free |
 
-A runtime is only described as **validated** after the plugin has actually been started and its capture/restore path has been exercised there.
+Compile/API verification means the same source builds against that Paper API. Runtime validation is tracked separately and is only claimed after the plugin actually starts successfully on that server line. Capture/restore gameplay is still a separate functional test and is not implied by a startup smoke.
 
 ## Entity data compatibility
 
@@ -36,7 +36,7 @@ Eggs produced by upstream EggEmAll2 versions used the plugin PDC key `eggemall_e
 
 ## Current dependency baseline
 
-- Paper API: `26.2.build.119-stable` (primary compile target)
+- Paper API: `26.2.build.121-stable` (primary compile target)
 - Foundation: `6.10.1`
 - RoseStacker API: `1.5.41` (provided/optional runtime integration)
 - UltimateStacker: no hard build dependency; legacy `com.songoda` and current `com.craftaro` API packages are detected reflectively
