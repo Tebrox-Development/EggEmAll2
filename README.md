@@ -6,14 +6,14 @@ EggEmAll2 lets players capture entities and receive their spawn eggs by throwing
 
 This repository is a maintained fork of [Dirty-Dog-Gaming/EggEmAll2](https://github.com/Dirty-Dog-Gaming/EggEmAll2), originally developed by **shadmage / Dirty-Dog-Gaming**.
 
-The goal of this fork is to keep the plugin working on current Paper releases while preserving the original gameplay, configuration and permissions as far as practical. The upstream project and its original author remain the source of the plugin; maintenance changes in this fork are intentionally kept traceable through Git history.
+The goal of this fork is to keep the plugin working on current Minecraft server releases while preserving the original gameplay, configuration and permissions as far as practical. The upstream project and its original author remain the source of the plugin; maintenance changes in this fork are intentionally kept traceable through Git history.
 
 ### Compatibility policy
 
 - Primary target: **Paper 26.2**
+- Manually validated runtimes: **Paper 26.2, Paper 1.21.7, Spigot 26.2 and Spigot 1.21.7**
 - Build toolchain: **Java 25**
 - Produced plugin bytecode: **Java 17** where feasible
-- Existing 1.21.x compatibility is preserved where the APIs and dependencies still allow it
 - Existing configuration keys and permission nodes should remain compatible unless a breaking change is unavoidable and documented
 
 See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation status.
