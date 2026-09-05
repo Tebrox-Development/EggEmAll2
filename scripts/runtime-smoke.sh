@@ -3,9 +3,13 @@ set -euo pipefail
 
 PAPER_VERSION="${PAPER_VERSION:-26.2}"
 PAPER_BUILD="${PAPER_BUILD:-121}"
+EXTRA_PLUGIN_URL="${EXTRA_PLUGIN_URL:-}"
+EXTRA_PLUGIN_NAME="${EXTRA_PLUGIN_NAME:-extra-plugin.jar}"
+EXPECT_LOG_PATTERN="${EXPECT_LOG_PATTERN:-}"
+RUNTIME_VARIANT="${RUNTIME_VARIANT:-base}"
 USER_AGENT="EggEmAll2-runtime-smoke/1.0 (https://github.com/Tebrox-Development/EggEmAll2)"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-RUNTIME_DIR="${ROOT_DIR}/target/runtime-smoke-${PAPER_VERSION}-${PAPER_BUILD}"
+RUNTIME_DIR="${ROOT_DIR}/target/runtime-smoke-${PAPER_VERSION}-${PAPER_BUILD}-${RUNTIME_VARIANT}"
 SERVER_DIR="${RUNTIME_DIR}/server"
 LOG_FILE="${SERVER_DIR}/logs/latest.log"
 BUILD_JSON="${RUNTIME_DIR}/paper-builds.json"
@@ -52,6 +56,13 @@ curl --fail --silent --show-error --location \
   --output "${SERVER_DIR}/paper.jar"
 
 cp "${PLUGIN_JAR}" "${SERVER_DIR}/plugins/EggEmAll2.jar"
+
+if [[ -n "${EXTRA_PLUGIN_URL}" ]]; then
+  curl --fail --silent --show-error --location \
+    --header "User-Agent: ${USER_AGENT}" \
+    "${EXTRA_PLUGIN_URL}" \
+    --output "${SERVER_DIR}/plugins/${EXTRA_PLUGIN_NAME}"
+fi
 
 SERVER_PORT="$(python3 - <<'PY'
 import socket
@@ -108,6 +119,12 @@ fi
 
 if grep -Eiq '(Could not load.*EggEmAll2|Error occurred while enabling EggEmAll2|Exception.*EggEmAll2|Could not pass event.*EggEmAll2|NoClassDefFoundError.*EggEmAll2)' "${LOG_FILE}"; then
   echo "EggEmAll2 startup error detected" >&2
+  cat "${LOG_FILE}" >&2
+  exit 1
+fi
+
+if [[ -n "${EXPECT_LOG_PATTERN}" ]] && ! grep -Fq "${EXPECT_LOG_PATTERN}" "${LOG_FILE}"; then
+  echo "Expected runtime log marker not found: ${EXPECT_LOG_PATTERN}" >&2
   cat "${LOG_FILE}" >&2
   exit 1
 fi
