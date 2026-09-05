@@ -12,8 +12,7 @@ body:
     id: category
     attributes:
       label: Bug category
-      description: What area is affected?
-      multiple: true
+      description: Which area best describes the problem?
       options:
         - Startup / loading
         - Mob capture
@@ -132,8 +131,7 @@ body:
     id: logs
     attributes:
       label: Relevant logs / stacktrace
-      description: Paste relevant console output or link to a complete log. Please remove secrets or private information.
-      render: shell
+      description: Paste relevant console output, attach a log file, or link to a complete log. Please remove secrets or private information.
     validations:
       required: false
 
@@ -141,8 +139,7 @@ body:
     id: configuration
     attributes:
       label: Relevant configuration
-      description: Paste only the configuration sections related to the issue. Remove secrets if present.
-      render: yaml
+      description: Paste only the configuration sections related to the issue, or attach the relevant file. Remove secrets if present.
     validations:
       required: false
 
