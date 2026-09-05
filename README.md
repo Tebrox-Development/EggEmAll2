@@ -1,25 +1,41 @@
 # Egg Em All 2
 
-EggEmAll2 is a plugin which allows players to 'capture' other entities and get their spawn eggs, by throwing chicken
-eggs at them
+EggEmAll2 lets players capture entities and receive their spawn eggs by throwing chicken eggs at them.
 
-#### There are 6 permissions for this plugin
+## Maintained fork
 
-- eggemall.command.reload ```reload the plugin```
-- eggemall.command.menu ```open the gui menu to view catchable/blacklisted entities```
-- eggemall.all ```grant all permissions below```
-- eggemall.villagers ```Allows catching Villager type entities```
-- eggemall.aggressive ```Allows catching Monsters```
-- eggemall.passive ```Allows catching Animals```
-- eggemall.unknown
-  ```If an entity wasn't grouped in the above it will require this permission, in theory it should not happen```
+This repository is a maintained fork of [Dirty-Dog-Gaming/EggEmAll2](https://github.com/Dirty-Dog-Gaming/EggEmAll2), originally developed by **shadmage / Dirty-Dog-Gaming**.
 
-#### Commands:
+The goal of this fork is to keep the plugin working on current Paper releases while preserving the original gameplay, configuration and permissions as far as practical. The upstream project and its original author remain the source of the plugin; maintenance changes in this fork are intentionally kept traceable through Git history.
 
-- /eggemall menu ```Opens a GUI where players can see catchable & blacklisted mobs```
+### Compatibility policy
 
-## v2.0.1 Published to SpigotMC
+- Primary target: **Paper 26.2**
+- Build toolchain: **Java 25**
+- Produced plugin bytecode: **Java 17** where feasible
+- Existing 1.21.x compatibility is preserved where the APIs and dependencies still allow it
+- Existing configuration keys and permission nodes should remain compatible unless a breaking change is unavoidable and documented
 
-https://www.spigotmc.org/resources/eggemall.122056/
+See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation status.
 
-https://bstats.org/plugin/bukkit/EggEmAll2/15978
+## Permissions
+
+- `eggemall.command.reload` - reload the plugin
+- `eggemall.command.menu` - open the GUI showing catchable and blacklisted entities
+- `eggemall.all` - grant all category permissions below
+- `eggemall.villagers` - allow catching villager-type entities
+- `eggemall.aggressive` - allow catching monsters
+- `eggemall.passive` - allow catching animals
+- `eggemall.unknown` - fallback category for entities not grouped above
+- `eggemall.catchmob.<mob>` - mob-specific catch permission
+
+## Commands
+
+- `/eggemall menu` - opens the GUI with catchable and blacklisted mobs
+- `/eggemall reload` - reloads the plugin configuration
+
+## Original project
+
+- Upstream repository: https://github.com/Dirty-Dog-Gaming/EggEmAll2
+- Original SpigotMC resource: https://www.spigotmc.org/resources/eggemall.122056/
+- Original bStats page: https://bstats.org/plugin/bukkit/EggEmAll2/15978

@@ -1,0 +1,35 @@
+# Compatibility
+
+EggEmAll2 is maintained with current Paper support as the primary target while avoiding unnecessary runtime requirements.
+
+## Java
+
+The project is built with **JDK 25** because Paper 26.2 and its current API are developed for the current Java generation. The plugin itself is compiled with `--release 17`, so its own classes remain Java-17 bytecode where the dependency/API surface permits this.
+
+This distinction is intentional: the build environment can move forward without automatically excluding servers that still run a Java version capable of loading Java-17 plugins.
+
+## Minecraft / Paper
+
+| Runtime | Status |
+| --- | --- |
+| Paper 26.2 | Primary target; compile/API validation enabled, runtime smoke still required |
+| Paper 26.1 | Compatibility intended; runtime validation pending |
+| Paper / Spigot 1.21.x | Upstream compatibility should be preserved where dependencies still support it; revalidation pending |
+| Older than 1.21 | Not a maintenance target for this fork unless compatibility comes for free |
+
+A runtime is only described as **validated** after the plugin has actually been started and its capture/restore path has been exercised there.
+
+## Compatibility rules
+
+1. Keep existing config keys and defaults unless a migration is necessary.
+2. Keep existing commands and permission nodes unless a security or correctness issue requires a change.
+3. Prefer version-adapter or reflective fallbacks for isolated API differences instead of raising the whole plugin's minimum version.
+4. Do not emulate removed server behavior when doing so would be fragile or unsafe; document the minimum version instead.
+5. Keep optional integrations optional. A missing or incompatible stacker plugin must not prevent EggEmAll2 from starting.
+
+## Current dependency baseline
+
+- Paper API: `26.2.build.119-stable` (compile target)
+- Foundation: `6.10.1`
+- RoseStacker API: `1.5.41` (provided/optional runtime integration)
+- UltimateStacker API: existing upstream `1.0.0-SNAPSHOT` integration retained for compatibility pending validation
