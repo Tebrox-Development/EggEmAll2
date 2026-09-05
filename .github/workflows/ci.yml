@@ -18,7 +18,7 @@ permissions:
 jobs:
   verify:
     name: JDK 25 / Java 17 bytecode / Maven Verify
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, resource-heavy]
     timeout-minutes: 15
 
     steps:
