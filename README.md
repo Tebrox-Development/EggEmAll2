@@ -42,7 +42,11 @@ PlaceholderAPI support is optional. EggEmAll2 works normally when PlaceholderAPI
 
 When PlaceholderAPI is available, normal `%...%` placeholders can be used in EggEmAll2 message values and spawn-egg lore in addition to the existing built-in `{...}` placeholders.
 
-EggEmAll2 also registers the following PlaceholderAPI placeholders:
+The PlaceholderAPI integration has been manually validated on **Paper 26.2** and **Paper 1.21.7**.
+
+### EggEmAll PlaceholderAPI placeholders
+
+EggEmAll2 registers the following PlaceholderAPI placeholders:
 
 - `%eggemall_version%` - installed EggEmAll2 version
 - `%eggemall_catch_chance%` - configured capture chance percentage
@@ -51,6 +55,18 @@ EggEmAll2 also registers the following PlaceholderAPI placeholders:
 - `%eggemall_require_permissions%` - whether capture permissions are required
 - `%eggemall_catchable_entities%` - number of currently catchable entity types
 - `%eggemall_blacklisted_entities%` - number of configured blacklisted entity types
+
+### Built-in EggEmAll placeholders
+
+The existing EggEmAll placeholders remain supported in their original message/lore contexts:
+
+- `{player}` - player who captured the entity
+- `{entity}` - captured entity type
+- `{entity_name}` - entity name used for the spawn-egg lore
+- `{profession}` - villager profession, or blank when not applicable
+- `{world}` - current world name in supported messages
+
+Villager professions are rendered as readable names such as `Fletcher` instead of the server's internal profession representation.
 
 ## Dependencies and attribution
 
