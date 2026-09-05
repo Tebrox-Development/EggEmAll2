@@ -35,6 +35,7 @@ import org.mineacademy.fo.remain.CompParticle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @AutoRegister
 public final class EggListener implements Listener {
@@ -56,7 +57,7 @@ public final class EggListener implements Listener {
 		}
 		if (shot instanceof Egg) {
 			String currentWorldName = shot.getWorld().getName();
-			if (Settings.BlacklistWorlds.AS_WHITELIST == Settings.BlacklistWorlds.WORLDS.contains(currentWorldName)) {
+			if (isCaptureAllowedInWorld(currentWorldName)) {
 				if (Settings.Particles.EGG_TRAILS) {
 					new BukkitRunnable() {
 						@Override
@@ -79,7 +80,8 @@ public final class EggListener implements Listener {
 		Entity targetEntity = event.getEntity();
 
 		String groupPermission = EggEmAllPlugin.catchableMobs.getCatchPermission(targetEntity);
-		String mobSpecificPermission = "eggemall.catchmob." + targetEntity.getName();
+		String mobSpecificPermission = "eggemall.catchmob." + targetEntity.getType().name().toLowerCase(Locale.ROOT);
+		String legacyMobSpecificPermission = "eggemall.catchmob." + targetEntity.getName();
 
 		if (!(event instanceof EntityDamageByEntityEvent damageEvent))
 			return;
@@ -90,7 +92,7 @@ public final class EggListener implements Listener {
 		EntityCaptureEvent entityCaptureEvent = new EntityCaptureEvent(targetEntity, egg);
 		EntityEscapeCaptureEvent entityEscapeEvent = new EntityEscapeCaptureEvent(targetEntity, egg);
 
-		if (!Settings.BlacklistWorlds.AS_WHITELIST && Settings.BlacklistWorlds.WORLDS.contains(egg.getWorld().getName())) {
+		if (!isCaptureAllowedInWorld(egg.getWorld().getName())) {
 			if (Settings.Messages.BLACKLISTED_WORLD.length() > 0 && egg.getShooter() instanceof Player player)
 				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.BLACKLISTED_WORLD, targetEntity));
 			return;
@@ -149,7 +151,9 @@ public final class EggListener implements Listener {
 			}
 		} else {
 			if (Settings.Restrictions.REQUIRE_PERMISSIONS)
-				if (!(player.hasPermission(groupPermission) || player.hasPermission(mobSpecificPermission))) {
+				if (!(player.hasPermission(groupPermission)
+						|| player.hasPermission(mobSpecificPermission)
+						|| player.hasPermission(legacyMobSpecificPermission))) {
 					if (Settings.Messages.NO_PERMISSION.length() > 0)
 						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_PERMISSION, targetEntity));
 					return;
@@ -204,6 +208,11 @@ public final class EggListener implements Listener {
 		if (!EggEmAllPlugin.thrownEggs.contains(egg)) {
 			EggEmAllPlugin.thrownEggs.add(egg);
 		}
+	}
+
+	private boolean isCaptureAllowedInWorld(String worldName) {
+		boolean worldIsListed = Settings.BlacklistWorlds.WORLDS.contains(worldName);
+		return Settings.BlacklistWorlds.AS_WHITELIST == worldIsListed;
 	}
 
 	private List<String> replacePlaceholders(List<String> loreLines, Entity entity, Player player) {

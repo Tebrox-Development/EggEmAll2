@@ -27,7 +27,9 @@ See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation st
 - `eggemall.aggressive` - allow catching monsters
 - `eggemall.passive` - allow catching animals
 - `eggemall.unknown` - fallback category for entities not grouped above
-- `eggemall.catchmob.<mob>` - mob-specific catch permission
+- `eggemall.catchmob.<entity_type>` - mob-specific catch permission using the lowercase Bukkit entity type, for example `eggemall.catchmob.cow`
+
+For compatibility with upstream 2.1.1 configurations, the previous display-name-derived mob-specific permission is also accepted during the transition.
 
 ## Commands
 
@@ -38,7 +40,7 @@ See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation st
 
 EggEmAll2 uses [MineAcademy Foundation](https://github.com/kangarko/Foundation), which is bundled into the plugin JAR and relocated into EggEmAll2's own package. Foundation remains the work of MineAcademy and is not claimed as part of EggEmAll2.
 
-Optional runtime integrations are provided for RoseStacker and UltimateStacker when those plugins are installed.
+Optional runtime integrations are provided for RoseStacker and UltimateStacker when those plugins are installed. The UltimateStacker integration detects both the legacy Songoda API package and the current Craftaro API package at runtime, so neither generation is a hard EggEmAll2 build dependency.
 
 ## Original project
 
