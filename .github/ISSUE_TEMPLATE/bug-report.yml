@@ -1,6 +1,5 @@
 name: 🐛 Bug report
 description: Report a reproducible problem with EggEmAll2.
-title: "[Bug]: "
 body:
   - type: markdown
     attributes:
@@ -9,7 +8,6 @@ body:
         Please provide exact version information and clear reproduction steps so the issue can be reproduced reliably.
 
   - type: dropdown
-    id: category
     attributes:
       label: Bug category
       description: Which area best describes the problem?
@@ -27,70 +25,22 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: server-software
+  - type: textarea
     attributes:
-      label: Server software
-      description: Which server implementation are you using?
-      options:
-        - Paper
-        - Spigot
-        - Purpur
-        - Other
+      label: Environment
+      description: Provide the exact server and plugin environment used to reproduce the problem.
+      placeholder: |
+        Server software: Paper / Spigot / Purpur / Other
+        Minecraft version: 26.2 / 1.21.7 / ...
+        Server build/version: ...
+        Java version: ...
+        EggEmAll2 version/snapshot/commit: ...
+        Stacking plugin: None / RoseStacker / UltimateStacker / Other
+        Relevant other plugins: ...
     validations:
       required: true
-
-  - type: input
-    id: minecraft-version
-    attributes:
-      label: Minecraft version
-      description: Provide the exact Minecraft version.
-      placeholder: "Example: 26.2 or 1.21.7"
-    validations:
-      required: true
-
-  - type: input
-    id: server-build
-    attributes:
-      label: Server build / version
-      description: Provide the exact Paper, Spigot, Purpur, or other server build/version.
-      placeholder: "Example: Paper 26.2 build 121"
-    validations:
-      required: true
-
-  - type: input
-    id: java-version
-    attributes:
-      label: Java version
-      description: Provide the exact Java version used to run the server.
-      placeholder: "Example: Temurin 25.0.2"
-    validations:
-      required: true
-
-  - type: input
-    id: eggemall-version
-    attributes:
-      label: EggEmAll2 version / snapshot
-      description: Provide the exact plugin version, release tag, snapshot name, or commit SHA if known.
-      placeholder: "Example: 2.2.0-SNAPSHOT / abcdef12"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: stacking-plugin
-    attributes:
-      label: Stacking plugin
-      description: Select the stacking plugin involved, if any.
-      options:
-        - None
-        - RoseStacker
-        - UltimateStacker
-        - Other
-    validations:
-      required: false
 
   - type: textarea
-    id: description
     attributes:
       label: Bug description
       description: Briefly describe the problem.
@@ -99,7 +49,6 @@ body:
       required: true
 
   - type: textarea
-    id: reproduction
     attributes:
       label: Steps to reproduce
       description: Provide clear step-by-step instructions that reliably trigger the problem.
@@ -112,7 +61,6 @@ body:
       required: true
 
   - type: textarea
-    id: expected
     attributes:
       label: Expected behaviour
       description: What did you expect to happen?
@@ -120,7 +68,6 @@ body:
       required: true
 
   - type: textarea
-    id: actual
     attributes:
       label: Actual behaviour
       description: What happened instead?
@@ -128,39 +75,13 @@ body:
       required: true
 
   - type: textarea
-    id: logs
     attributes:
-      label: Relevant logs / stacktrace
-      description: Paste relevant console output, attach a log file, or link to a complete log. Please remove secrets or private information.
-    validations:
-      required: false
-
-  - type: textarea
-    id: configuration
-    attributes:
-      label: Relevant configuration
-      description: Paste only the configuration sections related to the issue, or attach the relevant file. Remove secrets if present.
-    validations:
-      required: false
-
-  - type: textarea
-    id: plugins
-    attributes:
-      label: Other plugins
-      description: List other plugins that may be relevant, especially integrations or plugins affecting entities, spawn eggs, worlds, or permissions.
-    validations:
-      required: false
-
-  - type: textarea
-    id: additional
-    attributes:
-      label: Additional information
-      description: Add screenshots, videos, links, or any other useful context.
+      label: Logs, configuration, and additional context
+      description: Paste relevant logs or config sections, or attach files, screenshots, videos, and links. Remove secrets or private information.
     validations:
       required: false
 
   - type: checkboxes
-    id: confirmations
     attributes:
       label: Checks
       options:
