@@ -1,0 +1,36 @@
+name: Backward Compatibility
+
+on:
+  pull_request:
+    branches: [dev, master]
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [dev, master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  paper-1-21-7:
+    name: Paper 1.21.7 / Java 17 bytecode
+    runs-on: [self-hosted, Linux, X64, resource-heavy]
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Java 25 build toolchain
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Verify against Paper 1.21.7 API
+        run: mvn -B -ntp -Dpaper.version=1.21.7-R0.1-SNAPSHOT verify

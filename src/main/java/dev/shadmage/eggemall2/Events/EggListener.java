@@ -23,6 +23,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
@@ -35,10 +36,11 @@ import org.mineacademy.fo.remain.CompParticle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @AutoRegister
 public final class EggListener implements Listener {
-	private static final NamespacedKey EGGEMALL_ENTITY_DATA = new NamespacedKey(EggEmAllPlugin.getInstance(), "EGGEMALL_ENTITY_DATA");
+	private static final NamespacedKey EGGEMALL_ENTITY_DATA = new NamespacedKey(EggEmAllPlugin.getInstance(), "eggemall_entity_data");
 
 	@EventHandler
 	public void onPlayerEggThrow(PlayerEggThrowEvent event) {
@@ -56,7 +58,7 @@ public final class EggListener implements Listener {
 		}
 		if (shot instanceof Egg) {
 			String currentWorldName = shot.getWorld().getName();
-			if (Settings.BlacklistWorlds.AS_WHITELIST == Settings.BlacklistWorlds.WORLDS.contains(currentWorldName)) {
+			if (isCaptureAllowedInWorld(currentWorldName)) {
 				if (Settings.Particles.EGG_TRAILS) {
 					new BukkitRunnable() {
 						@Override
@@ -79,7 +81,8 @@ public final class EggListener implements Listener {
 		Entity targetEntity = event.getEntity();
 
 		String groupPermission = EggEmAllPlugin.catchableMobs.getCatchPermission(targetEntity);
-		String mobSpecificPermission = "eggemall.catchmob." + targetEntity.getName();
+		String mobSpecificPermission = "eggemall.catchmob." + targetEntity.getType().name().toLowerCase(Locale.ROOT);
+		String legacyMobSpecificPermission = "eggemall.catchmob." + targetEntity.getName();
 
 		if (!(event instanceof EntityDamageByEntityEvent damageEvent))
 			return;
@@ -90,7 +93,7 @@ public final class EggListener implements Listener {
 		EntityCaptureEvent entityCaptureEvent = new EntityCaptureEvent(targetEntity, egg);
 		EntityEscapeCaptureEvent entityEscapeEvent = new EntityEscapeCaptureEvent(targetEntity, egg);
 
-		if (!Settings.BlacklistWorlds.AS_WHITELIST && Settings.BlacklistWorlds.WORLDS.contains(egg.getWorld().getName())) {
+		if (!isCaptureAllowedInWorld(egg.getWorld().getName())) {
 			if (Settings.Messages.BLACKLISTED_WORLD.length() > 0 && egg.getShooter() instanceof Player player)
 				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.BLACKLISTED_WORLD, targetEntity));
 			return;
@@ -149,7 +152,9 @@ public final class EggListener implements Listener {
 			}
 		} else {
 			if (Settings.Restrictions.REQUIRE_PERMISSIONS)
-				if (!(player.hasPermission(groupPermission) || player.hasPermission(mobSpecificPermission))) {
+				if (!(player.hasPermission(groupPermission)
+						|| player.hasPermission(mobSpecificPermission)
+						|| player.hasPermission(legacyMobSpecificPermission))) {
 					if (Settings.Messages.NO_PERMISSION.length() > 0)
 						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_PERMISSION, targetEntity));
 					return;
@@ -181,15 +186,28 @@ public final class EggListener implements Listener {
 			}
 		}
 
-		String entitySnapshot = targetEntity.createSnapshot().getAsString();
 		ItemMeta meta = eggStack.getItemMeta();
 		if (meta != null) {
 			if (egg.getShooter() instanceof Player player && Settings.CatchChance.ADD_LORE_TO_EGG) {
 				List<String> newLore = replacePlaceholders(Settings.CatchChance.LORE_LINES, targetEntity, player);
 				meta.setLore(newLore);
 			}
-			if (Settings.NBT.MAINTAIN_ENTITY_DATA)
-				meta.getPersistentDataContainer().set(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING, entitySnapshot);
+
+			if (Settings.NBT.MAINTAIN_ENTITY_DATA) {
+				EntitySnapshot entitySnapshot = targetEntity.createSnapshot();
+				if (entitySnapshot != null) {
+					if (meta instanceof SpawnEggMeta spawnEggMeta) {
+						spawnEggMeta.setSpawnedEntity(entitySnapshot);
+					} else {
+						// Fallback for unusual egg implementations. New normal Paper spawn eggs use SpawnEggMeta.
+						meta.getPersistentDataContainer().set(
+								EGGEMALL_ENTITY_DATA,
+								PersistentDataType.STRING,
+								entitySnapshot.getAsString());
+					}
+				}
+			}
+
 			eggStack.setItemMeta(meta);
 		}
 
@@ -204,6 +222,11 @@ public final class EggListener implements Listener {
 		if (!EggEmAllPlugin.thrownEggs.contains(egg)) {
 			EggEmAllPlugin.thrownEggs.add(egg);
 		}
+	}
+
+	private boolean isCaptureAllowedInWorld(String worldName) {
+		boolean worldIsListed = Settings.BlacklistWorlds.WORLDS.contains(worldName);
+		return Settings.BlacklistWorlds.AS_WHITELIST == worldIsListed;
 	}
 
 	private List<String> replacePlaceholders(List<String> loreLines, Entity entity, Player player) {
@@ -241,8 +264,9 @@ public final class EggListener implements Listener {
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getItem() != null) {
 			ItemStack item = e.getItem();
 			if (CompMaterial.isMonsterEgg(item.getType()) && Settings.NBT.MAINTAIN_ENTITY_DATA) {
-				if (item.getPersistentDataContainer().has(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING)) {
-					String snapshotString = item.getPersistentDataContainer().get(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING);
+				ItemMeta meta = item.getItemMeta();
+				if (meta != null && meta.getPersistentDataContainer().has(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING)) {
+					String snapshotString = meta.getPersistentDataContainer().get(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING);
 					EntitySnapshot snapshot = Bukkit.getEntityFactory().createEntitySnapshot(snapshotString);
 					Location loc = e.getClickedBlock().getLocation().clone().add(0.5, 1, 0.5);
 					while (!CompMaterial.isAir(loc.getBlock()) && !CompMaterial.isAir(loc.getBlock().getRelative(BlockFace.UP)))
