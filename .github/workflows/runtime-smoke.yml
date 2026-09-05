@@ -18,7 +18,7 @@ permissions:
 jobs:
   paper-26-2:
     name: Paper 26.2 build 121 startup
-    runs-on: [self-hosted, Linux, X64]
+    runs-on: [self-hosted, Linux, X64, resource-heavy]
     timeout-minutes: 20
 
     steps:
