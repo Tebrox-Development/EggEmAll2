@@ -37,17 +37,22 @@ public class EggEmAllPlugin extends SimplePlugin {
 		Common.setLogPrefix(Settings.LOG_PREFIX);
 		Common.setTellPrefix(Settings.CHAT_PREFIX);
 
-
 		// Check for a supported stacking plugin
 		RoseStackerSupport rsSupport = new RoseStackerSupport();
 		if (rsSupport.isStackingPluginLoaded()) {
 			stackingPlugin = rsSupport;
 			Common.log("&6RoseStacker detected! &fEgg em All will work with RoseStacker!");
-		} else if (Common.doesPluginExist("UltimateStacker")) {
-			stackingPlugin = new UltimateStackerSupport();
+			return;
+		}
+
+		UltimateStackerSupport usSupport = new UltimateStackerSupport();
+		if (usSupport.isStackingPluginLoaded()) {
+			stackingPlugin = usSupport;
 			Common.log("&6UltimateStacker detected! &fEgg em All will work with UltimateStacker!");
-		} else
-			stackingPlugin = null;
+			return;
+		}
+
+		stackingPlugin = null;
 	}
 
 	@Override
