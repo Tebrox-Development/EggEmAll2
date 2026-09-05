@@ -240,6 +240,7 @@ public final class EggListener implements Listener {
 					line = line.replace("{profession}", ItemUtil.bountifyCapitalized(villager.getProfession().toString()));
 				} else {
 					line = line.replace("{profession}", "");
+				}
 			} else
 				line = line.replace("{profession}", "");
 			newLore.add(Common.colorize(line));
