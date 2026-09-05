@@ -7,7 +7,6 @@ import dev.shadmage.eggemall2._external.SpigotUpdateChecker;
 import dev.shadmage.eggemall2._external.StackingPlugins.RoseStackerSupport;
 import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
 import dev.shadmage.eggemall2._external.StackingPlugins.UltimateStackerSupport;
-import lombok.Getter;
 import org.bukkit.entity.Egg;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -19,11 +18,14 @@ public class EggEmAllPlugin extends SimplePlugin {
 	public static List<Egg> thrownEggs = new ArrayList<>();
 	public static SpawnEggs catchableMobs;
 
-	@Getter
 	private StackingPluginAPI stackingPlugin;
 
 	public static EggEmAllPlugin getInstance() {
 		return (EggEmAllPlugin) SimplePlugin.getInstance();
+	}
+
+	public StackingPluginAPI getStackingPlugin() {
+		return stackingPlugin;
 	}
 
 	@Override
