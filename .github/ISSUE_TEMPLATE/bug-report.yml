@@ -1,0 +1,173 @@
+name: 🐛 Bug report
+description: Report a reproducible problem with EggEmAll2.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem with EggEmAll2.
+        Please provide exact version information and clear reproduction steps so the issue can be reproduced reliably.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Bug category
+      description: What area is affected?
+      multiple: true
+      options:
+        - Startup / loading
+        - Mob capture
+        - Spawn egg / restoring entity
+        - Entity data / NBT
+        - Permissions
+        - Configuration / world restrictions
+        - Paper / Spigot compatibility
+        - RoseStacker / UltimateStacker integration
+        - Performance
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: server-software
+    attributes:
+      label: Server software
+      description: Which server implementation are you using?
+      options:
+        - Paper
+        - Spigot
+        - Purpur
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: minecraft-version
+    attributes:
+      label: Minecraft version
+      description: Provide the exact Minecraft version.
+      placeholder: "Example: 26.2 or 1.21.7"
+    validations:
+      required: true
+
+  - type: input
+    id: server-build
+    attributes:
+      label: Server build / version
+      description: Provide the exact Paper, Spigot, Purpur, or other server build/version.
+      placeholder: "Example: Paper 26.2 build 121"
+    validations:
+      required: true
+
+  - type: input
+    id: java-version
+    attributes:
+      label: Java version
+      description: Provide the exact Java version used to run the server.
+      placeholder: "Example: Temurin 25.0.2"
+    validations:
+      required: true
+
+  - type: input
+    id: eggemall-version
+    attributes:
+      label: EggEmAll2 version / snapshot
+      description: Provide the exact plugin version, release tag, snapshot name, or commit SHA if known.
+      placeholder: "Example: 2.2.0-SNAPSHOT / abcdef12"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: stacking-plugin
+    attributes:
+      label: Stacking plugin
+      description: Select the stacking plugin involved, if any.
+      options:
+        - None
+        - RoseStacker
+        - UltimateStacker
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug description
+      description: Briefly describe the problem.
+      placeholder: Describe what is going wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Provide clear step-by-step instructions that reliably trigger the problem.
+      placeholder: |
+        1. Start the server with ...
+        2. Spawn ...
+        3. Throw ...
+        4. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs / stacktrace
+      description: Paste relevant console output or link to a complete log. Please remove secrets or private information.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Relevant configuration
+      description: Paste only the configuration sections related to the issue. Remove secrets if present.
+      render: yaml
+    validations:
+      required: false
+
+  - type: textarea
+    id: plugins
+    attributes:
+      label: Other plugins
+      description: List other plugins that may be relevant, especially integrations or plugins affecting entities, spawn eggs, worlds, or permissions.
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional information
+      description: Add screenshots, videos, links, or any other useful context.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Checks
+      options:
+        - label: I have included exact version information.
+          required: true
+        - label: I have checked for an existing issue describing the same problem.
+          required: true
