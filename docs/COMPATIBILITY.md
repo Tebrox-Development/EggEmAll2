@@ -8,21 +8,25 @@ The project is built with **JDK 25** because Paper 26.2 and its current API are 
 
 This distinction is intentional: the build environment can move forward without automatically excluding servers that still run a Java version capable of loading Java-17 plugins.
 
-## Minecraft / Paper
+## Minecraft / server software
 
 | Runtime | Status |
 | --- | --- |
-| Paper 26.2 build 121 | Primary target; compile/API verification is green, automated startup smoke enabled |
-| Paper 26.1 | Compatibility intended; runtime validation pending |
-| Paper 1.21.7 | Backward-compatibility compile/API verification is green; runtime validation still pending |
-| Other Paper / Spigot 1.21.x | Best-effort compatibility; not claimed until explicitly tested |
+| Paper 26.2 build 121 | Primary target; compile/API verification, automated startup smoke and manual functional validation passed |
+| Paper 1.21.7 | Backward-compatibility compile/API verification and manual functional validation passed |
+| Spigot 26.2 | Manual functional validation passed |
+| Spigot 1.21.7 | Manual functional validation passed |
 | Older than 1.21 | Not a maintenance target for this fork unless compatibility comes for free |
 
-Compile/API verification means the same source builds against that Paper API. Runtime validation is tracked separately and is only claimed after the plugin actually starts successfully on that server line. Capture/restore gameplay is still a separate functional test and is not implied by a startup smoke.
+The same EggEmAll2 JAR was manually validated across the tested Paper and Spigot runtimes. Functional validation covered the core capture flow, spawn-egg restoration, entity-data preservation, permissions, world restrictions, capture restrictions and chance handling.
+
+Optional stacking integrations were also exercised during runtime testing. RoseStacker and UltimateStacker both correctly allowed EggEmAll2 to capture one entity from a stack while reducing the remaining stack by exactly one.
+
+Compile/API verification means the same source builds against the selected Paper API. Runtime validation is tracked separately and is only claimed after the plugin actually starts and the relevant gameplay flow has been exercised on that server line.
 
 ## Entity data compatibility
 
-New captured eggs use Paper's native `SpawnEggMeta` / `EntitySnapshot` support when `NBT.MaintainEntityDataValues` is enabled. This avoids treating `EntitySnapshot#getAsString()` as a long-term persistence format.
+New captured eggs use the server's native `SpawnEggMeta` / `EntitySnapshot` support when `NBT.MaintainEntityDataValues` is enabled. This avoids treating `EntitySnapshot#getAsString()` as a long-term persistence format for newly created normal spawn eggs.
 
 Eggs produced by upstream EggEmAll2 versions used the plugin PDC key `eggemall_entity_data` containing the snapshot string. The legacy reader remains in place so those existing eggs can still be restored where the current server can parse their stored snapshot data.
 
