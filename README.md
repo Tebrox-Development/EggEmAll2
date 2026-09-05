@@ -36,11 +36,27 @@ For compatibility with upstream 2.1.1 configurations, the previous display-name-
 - `/eggemall menu` - opens the GUI with catchable and blacklisted mobs
 - `/eggemall reload` - reloads the plugin configuration
 
+## PlaceholderAPI
+
+PlaceholderAPI support is optional. EggEmAll2 works normally when PlaceholderAPI is not installed.
+
+When PlaceholderAPI is available, normal `%...%` placeholders can be used in EggEmAll2 message values and spawn-egg lore in addition to the existing built-in `{...}` placeholders.
+
+EggEmAll2 also registers the following PlaceholderAPI placeholders:
+
+- `%eggemall_version%` - installed EggEmAll2 version
+- `%eggemall_catch_chance%` - configured capture chance percentage
+- `%eggemall_world_mode%` - `blacklist` or `whitelist`
+- `%eggemall_world_allowed%` - whether capture is allowed in the current player's world
+- `%eggemall_require_permissions%` - whether capture permissions are required
+- `%eggemall_catchable_entities%` - number of currently catchable entity types
+- `%eggemall_blacklisted_entities%` - number of configured blacklisted entity types
+
 ## Dependencies and attribution
 
 EggEmAll2 uses [MineAcademy Foundation](https://github.com/kangarko/Foundation), which is bundled into the plugin JAR and relocated into EggEmAll2's own package. Foundation remains the work of MineAcademy and is not claimed as part of EggEmAll2.
 
-Optional runtime integrations are provided for RoseStacker and UltimateStacker when those plugins are installed. The UltimateStacker integration detects both the legacy Songoda API package and the current Craftaro API package at runtime, so neither generation is a hard EggEmAll2 build dependency.
+Optional runtime integrations are provided for PlaceholderAPI, RoseStacker and UltimateStacker when those plugins are installed. The UltimateStacker integration detects both the legacy Songoda API package and the current Craftaro API package at runtime, so neither generation is a hard EggEmAll2 build dependency.
 
 ## Original project
 

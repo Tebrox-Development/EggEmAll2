@@ -3,10 +3,12 @@ package dev.shadmage.eggemall2;
 import dev.shadmage.eggemall2.Model.SpawnEggs;
 import dev.shadmage.eggemall2.Settings.Settings;
 import dev.shadmage.eggemall2._external.Metrics;
+import dev.shadmage.eggemall2._external.PlaceholderAPI.PlaceholderAPISupport;
 import dev.shadmage.eggemall2._external.SpigotUpdateChecker;
 import dev.shadmage.eggemall2._external.StackingPlugins.RoseStackerSupport;
 import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
 import dev.shadmage.eggemall2._external.StackingPlugins.UltimateStackerSupport;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Egg;
 import org.mineacademy.fo.Common;
 import org.mineacademy.fo.plugin.SimplePlugin;
@@ -36,6 +38,12 @@ public class EggEmAllPlugin extends SimplePlugin {
 		//set logging & chat prefixes
 		Common.setLogPrefix(Settings.LOG_PREFIX);
 		Common.setTellPrefix(Settings.CHAT_PREFIX);
+
+		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+			if (PlaceholderAPISupport.registerExpansion(this)) {
+				Common.log("&6PlaceholderAPI detected! &fRegistered EggEmAll placeholders.");
+			}
+		}
 
 		// Check for a supported stacking plugin
 		RoseStackerSupport rsSupport = new RoseStackerSupport();

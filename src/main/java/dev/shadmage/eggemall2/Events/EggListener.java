@@ -95,13 +95,13 @@ public final class EggListener implements Listener {
 
 		if (!isCaptureAllowedInWorld(egg.getWorld().getName())) {
 			if (Settings.Messages.BLACKLISTED_WORLD.length() > 0 && egg.getShooter() instanceof Player player)
-				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.BLACKLISTED_WORLD, targetEntity));
+				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.BLACKLISTED_WORLD, targetEntity, player));
 			return;
 		}
 
 		if (!EggEmAllPlugin.catchableMobs.isCatchable(targetEntity)) {
 			if (Settings.Messages.NOT_CATCHABLE.length() > 0 && egg.getShooter() instanceof Player player)
-				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NOT_CATCHABLE, targetEntity));
+				Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NOT_CATCHABLE, targetEntity, player));
 			return;
 		}
 
@@ -112,7 +112,7 @@ public final class EggListener implements Listener {
 			if (targetEntity instanceof Ageable)
 				if (!((Ageable) targetEntity).isAdult()) {
 					if (Settings.Messages.NO_BABIES.length() > 0 && egg.getShooter() instanceof Player player)
-						Common.tell(player, Settings.Messages.NO_BABIES);
+						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_BABIES, targetEntity, player));
 					return;
 				}
 
@@ -120,7 +120,7 @@ public final class EggListener implements Listener {
 			if (targetEntity instanceof Tameable)
 				if (((Tameable) targetEntity).isTamed()) {
 					if (Settings.Messages.NO_TAMED.length() > 0 && egg.getShooter() instanceof Player player)
-						Common.tell(player, Settings.Messages.NO_TAMED);
+						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_TAMED, targetEntity, player));
 					return;
 				}
 
@@ -128,14 +128,14 @@ public final class EggListener implements Listener {
 			if (targetEntity instanceof Sheep)
 				if (((Sheep) targetEntity).isSheared()) {
 					if (Settings.Messages.NO_SHEARED_SHEEP.length() > 0 && egg.getShooter() instanceof Player player)
-						Common.tell(player, Settings.Messages.NO_SHEARED_SHEEP);
+						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_SHEARED_SHEEP, targetEntity, player));
 					return;
 				}
 
 		if (Settings.Restrictions.PREVENT_CATCHING_NAMED_ENTITIES)
 			if (targetEntity.getCustomName() != null) {
 				if (Settings.Messages.NO_NAMED_ENTITIES.length() > 0 && egg.getShooter() instanceof Player player)
-					Common.tell(player, Settings.Messages.NO_NAMED_ENTITIES);
+					Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_NAMED_ENTITIES, targetEntity, player));
 				return;
 			}
 
@@ -156,17 +156,17 @@ public final class EggListener implements Listener {
 						|| player.hasPermission(mobSpecificPermission)
 						|| player.hasPermission(legacyMobSpecificPermission))) {
 					if (Settings.Messages.NO_PERMISSION.length() > 0)
-						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_PERMISSION, targetEntity));
+						Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.NO_PERMISSION, targetEntity, player));
 					return;
 				}
 
 			if (RandomUtil.chance(Settings.CatchChance.CHANCE_PERCENTAGE)) {
 				if (Settings.Messages.CATCH_SUCCESS.length() > 0)
-					Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.CATCH_SUCCESS, targetEntity));
+					Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.CATCH_SUCCESS, targetEntity, player));
 			} else {
 				EggEmAllPlugin.getInstance().getServer().getPluginManager().callEvent(entityEscapeEvent);
 				if (Settings.Messages.CATCH_FAILED_CHANCE.length() > 0)
-					Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.CATCH_FAILED_CHANCE, targetEntity));
+					Common.tell(player, ProcessPlaceholderMessages.ReplacePlaceholders(Settings.Messages.CATCH_FAILED_CHANCE, targetEntity, player));
 				return;
 			}
 		}
@@ -243,6 +243,7 @@ public final class EggListener implements Listener {
 				}
 			} else
 				line = line.replace("{profession}", "");
+			line = ProcessPlaceholderMessages.ReplacePlaceholders(line, entity, player);
 			newLore.add(Common.colorize(line));
 		}
 
