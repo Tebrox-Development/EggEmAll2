@@ -5,9 +5,7 @@ on:
     branches: [dev]
     types: [opened, synchronize, reopened, ready_for_review]
   push:
-    branches:
-      - dev
-      - 'modernize/**'
+    branches: [dev]
   workflow_dispatch:
 
 concurrency:
