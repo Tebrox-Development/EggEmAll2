@@ -28,7 +28,8 @@ CatchChance:
   RemoveEntityOnFail: true
   # Only applicable when a player throws the egg
   AddLoreToSpawnEgg: true
-  # Supports placeholders
+  # Supports built-in EggEmAll placeholders. When PlaceholderAPI is installed,
+  # normal PlaceholderAPI placeholders such as %player_name% are also parsed.
   # -> {player} = Name of the player that caught the mob
   # -> {entity} = The type of entity
   # -> {entity_name} = The name of the mob if it had a custom name, or the entity type/profession if not
@@ -70,6 +71,9 @@ GUI:
   CatchableEntitiesTitle: "&2&l&oCatchable Entities"
   BlacklistedEntitiesTitle: "&c&l&oBlacklisted Entities"
 
+# Message values keep the built-in {entity}/{world} placeholders.
+# When PlaceholderAPI is installed, %...% placeholders are additionally parsed
+# with the player who threw the egg as context.
 Messages:
   NoPermissions: "Sorry you don't have permission to catch {entity}"
   NotCatchable: "Sorry, {entity} cannot be caught"

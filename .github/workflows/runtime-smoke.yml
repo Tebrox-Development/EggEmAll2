@@ -39,4 +39,66 @@ jobs:
         env:
           PAPER_VERSION: '26.2'
           PAPER_BUILD: '121'
+          RUNTIME_VARIANT: 'without-papi'
+        run: bash scripts/runtime-smoke.sh
+
+  paper-1-21-7:
+    name: Paper 1.21.7 build 32 startup
+    runs-on: [self-hosted, Linux, X64, resource-heavy]
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Java 25 build toolchain
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Verify and build current plugin
+        run: mvn -B -ntp verify
+
+      - name: Set up Java 21 runtime
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Start Paper 1.21.7 without PlaceholderAPI
+        env:
+          PAPER_VERSION: '1.21.7'
+          PAPER_BUILD: '32'
+          RUNTIME_VARIANT: 'without-papi'
+        run: bash scripts/runtime-smoke.sh
+
+  paper-26-2-placeholderapi:
+    name: Paper 26.2 + PlaceholderAPI startup
+    runs-on: [self-hosted, Linux, X64, resource-heavy]
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Set up Java 25
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95 # v5.6.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      - name: Verify and build plugin
+        run: mvn -B -ntp verify
+
+      - name: Start Paper with PlaceholderAPI and EggEmAll2
+        env:
+          PAPER_VERSION: '26.2'
+          PAPER_BUILD: '121'
+          RUNTIME_VARIANT: 'with-papi'
+          EXTRA_PLUGIN_URL: 'https://github.com/PlaceholderAPI/PlaceholderAPI/releases/download/2.12.3/PlaceholderAPI-2.12.3.jar'
+          EXTRA_PLUGIN_NAME: 'PlaceholderAPI.jar'
+          EXPECT_LOG_PATTERN: 'PlaceholderAPI detected! Registered EggEmAll placeholders.'
         run: bash scripts/runtime-smoke.sh
