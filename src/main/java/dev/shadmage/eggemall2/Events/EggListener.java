@@ -240,7 +240,6 @@ public final class EggListener implements Listener {
 					line = line.replace("{profession}", ItemUtil.bountifyCapitalized(villager.getProfession().toString()));
 				} else {
 					line = line.replace("{profession}", "");
-				}
 			} else
 				line = line.replace("{profession}", "");
 			newLore.add(Common.colorize(line));
@@ -264,8 +263,9 @@ public final class EggListener implements Listener {
 		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getItem() != null) {
 			ItemStack item = e.getItem();
 			if (CompMaterial.isMonsterEgg(item.getType()) && Settings.NBT.MAINTAIN_ENTITY_DATA) {
-				if (item.getPersistentDataContainer().has(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING)) {
-					String snapshotString = item.getPersistentDataContainer().get(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING);
+				ItemMeta meta = item.getItemMeta();
+				if (meta != null && meta.getPersistentDataContainer().has(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING)) {
+					String snapshotString = meta.getPersistentDataContainer().get(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING);
 					EntitySnapshot snapshot = Bukkit.getEntityFactory().createEntitySnapshot(snapshotString);
 					Location loc = e.getClickedBlock().getLocation().clone().add(0.5, 1, 0.5);
 					while (!CompMaterial.isAir(loc.getBlock()) && !CompMaterial.isAir(loc.getBlock().getRelative(BlockFace.UP)))
