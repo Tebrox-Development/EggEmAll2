@@ -237,7 +237,7 @@ public final class EggListener implements Listener {
 			line = line.replace("{player}", player.getName());
 			if (entity instanceof Villager villager) {
 				if (villager.getProfession() != Villager.Profession.NONE) {
-					line = line.replace("{profession}", ItemUtil.bountifyCapitalized(villager.getProfession().toString()));
+					line = line.replace("{profession}", ItemUtil.bountifyCapitalized(villager.getProfession().getKey().getKey()));
 				} else {
 					line = line.replace("{profession}", "");
 				}
