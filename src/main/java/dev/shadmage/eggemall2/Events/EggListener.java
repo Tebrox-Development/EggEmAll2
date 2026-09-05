@@ -23,6 +23,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.mineacademy.fo.Common;
@@ -39,7 +40,7 @@ import java.util.Locale;
 
 @AutoRegister
 public final class EggListener implements Listener {
-	private static final NamespacedKey EGGEMALL_ENTITY_DATA = new NamespacedKey(EggEmAllPlugin.getInstance(), "EGGEMALL_ENTITY_DATA");
+	private static final NamespacedKey EGGEMALL_ENTITY_DATA = new NamespacedKey(EggEmAllPlugin.getInstance(), "eggemall_entity_data");
 
 	@EventHandler
 	public void onPlayerEggThrow(PlayerEggThrowEvent event) {
@@ -185,15 +186,28 @@ public final class EggListener implements Listener {
 			}
 		}
 
-		String entitySnapshot = targetEntity.createSnapshot().getAsString();
 		ItemMeta meta = eggStack.getItemMeta();
 		if (meta != null) {
 			if (egg.getShooter() instanceof Player player && Settings.CatchChance.ADD_LORE_TO_EGG) {
 				List<String> newLore = replacePlaceholders(Settings.CatchChance.LORE_LINES, targetEntity, player);
 				meta.setLore(newLore);
 			}
-			if (Settings.NBT.MAINTAIN_ENTITY_DATA)
-				meta.getPersistentDataContainer().set(EGGEMALL_ENTITY_DATA, PersistentDataType.STRING, entitySnapshot);
+
+			if (Settings.NBT.MAINTAIN_ENTITY_DATA) {
+				EntitySnapshot entitySnapshot = targetEntity.createSnapshot();
+				if (entitySnapshot != null) {
+					if (meta instanceof SpawnEggMeta spawnEggMeta) {
+						spawnEggMeta.setSpawnedEntity(entitySnapshot);
+					} else {
+						// Fallback for unusual egg implementations. New normal Paper spawn eggs use SpawnEggMeta.
+						meta.getPersistentDataContainer().set(
+								EGGEMALL_ENTITY_DATA,
+								PersistentDataType.STRING,
+								entitySnapshot.getAsString());
+					}
+				}
+			}
+
 			eggStack.setItemMeta(meta);
 		}
 
