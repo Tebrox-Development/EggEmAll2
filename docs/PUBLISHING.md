@@ -4,13 +4,13 @@ This checklist covers the remaining manual publication steps for the maintained 
 
 ## Release blockers
 
-Do not publish an EggEmAll Reloaded build to SpigotMC or Modrinth while it still uses the original project's Spigot publication identifier.
+The Spigot update checker is intentionally disabled until EggEmAll Reloaded has its own SpigotMC resource and resource ID.
 
 Before the first public release:
 
 1. Create the new **SpigotMC resource** for EggEmAll Reloaded.
-2. Replace the original Spigot resource ID `122056` used by `SpigotUpdateChecker` in `src/main/java/dev/shadmage/eggemall2/EggEmAllPlugin.java` with the new EggEmAll Reloaded resource ID.
-3. Run the full Maven verification and runtime smoke tests again after the Spigot resource ID is changed.
+2. Re-enable `SpigotUpdateChecker` in `src/main/java/dev/shadmage/eggemall2/EggEmAllPlugin.java` using the new EggEmAll Reloaded resource ID.
+3. Run the full Maven verification and runtime smoke tests again after the update checker is re-enabled.
 4. Verify on a test server that bStats reports to the registered EggEmAll Reloaded project ID `33887`.
 
 ## SpigotMC
@@ -23,7 +23,7 @@ Link back to:
 - the original upstream GitHub repository;
 - the maintained Tebrox-Development repository.
 
-After the resource is live, add its final URL to the README and use its numeric resource ID for the update checker.
+After the resource is live, add its final URL to the README and use its numeric resource ID when re-enabling the update checker.
 
 ## Modrinth
 
@@ -58,7 +58,7 @@ The following compatibility identifiers intentionally stay unchanged unless a se
 
 Before uploading the first public build:
 
-- new Spigot resource ID configured;
+- new Spigot resource exists and the update checker is re-enabled with its new resource ID;
 - bStats project ID `33887` configured and reporting verified;
 - SpigotMC attribution text present;
 - Modrinth attribution/derivative disclosure present;
