@@ -20,6 +20,7 @@
         <foundation.version>6.10.1</foundation.version>
         <rosestacker.version>1.5.41</rosestacker.version>
         <placeholderapi.version>2.12.3</placeholderapi.version>
+        <bstats.version>3.2.1</bstats.version>
 
         <foundation.path>com.github.kangarko</foundation.path>
         <mavencompiler.version>3.14.1</mavencompiler.version>
@@ -83,6 +84,13 @@
             <version>${placeholderapi.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>${bstats.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -138,12 +146,17 @@
                     <artifactSet>
                         <includes>
                             <include>${foundation.path}:Foundation*</include>
+                            <include>org.bstats:*</include>
                         </includes>
                     </artifactSet>
                     <relocations>
                         <relocation>
                             <pattern>org.mineacademy.fo</pattern>
                             <shadedPattern>${project.groupId}.${project.artifactId}.lib</shadedPattern>
+                        </relocation>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <shadedPattern>${project.groupId}.${project.artifactId}.lib.bstats</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
