@@ -26,7 +26,7 @@ See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation st
 
 EggEmAll Reloaded uses a new plugin name. Existing command aliases and permission nodes remain unchanged, but server owners upgrading from EggEmAll2 should preserve their existing configuration before replacing the plugin and verify the plugin data directory during the first migration.
 
-A release should not be published until the new SpigotMC resource ID and the new bStats plugin ID have been configured. See [docs/PUBLISHING.md](docs/PUBLISHING.md).
+A release should not be published until the new SpigotMC resource ID has been configured and the new bStats project has been verified with a test server. See [docs/PUBLISHING.md](docs/PUBLISHING.md).
 
 ## Permissions
 
@@ -81,6 +81,8 @@ Villager professions are rendered as readable names such as `Fletcher` instead o
 ## Dependencies and attribution
 
 EggEmAll Reloaded uses [MineAcademy Foundation](https://github.com/kangarko/Foundation), which is bundled into the plugin JAR and relocated into the plugin's own package. Foundation remains the work of MineAcademy and is not claimed as part of EggEmAll Reloaded.
+
+Anonymous usage metrics are provided through the official **bStats Bukkit 3.2.1** library, which is shaded and relocated into the plugin JAR. EggEmAll Reloaded reports to its own bStats project with plugin ID **33887**, separate from the original EggEmAll2 metrics project.
 
 Optional runtime integrations are provided for PlaceholderAPI, RoseStacker and UltimateStacker when those plugins are installed. The UltimateStacker integration detects both the legacy Songoda API package and the current Craftaro API package at runtime, so neither generation is a hard build dependency.
 
