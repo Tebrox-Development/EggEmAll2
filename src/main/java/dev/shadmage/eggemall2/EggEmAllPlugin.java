@@ -4,6 +4,7 @@ import dev.shadmage.eggemall2.Model.SpawnEggs;
 import dev.shadmage.eggemall2.Settings.Settings;
 import dev.shadmage.eggemall2.Utils.LegacyMigration;
 import dev.shadmage.eggemall2._external.PlaceholderAPI.PlaceholderAPISupport;
+import dev.shadmage.eggemall2._external.SpigotUpdateChecker;
 import dev.shadmage.eggemall2._external.StackingPlugins.RoseStackerSupport;
 import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
 import dev.shadmage.eggemall2._external.StackingPlugins.UltimateStackerSupport;
@@ -33,8 +34,7 @@ public class EggEmAllPlugin extends SimplePlugin {
 	@Override
 	protected void onPluginStart() {
 		new Metrics(this, 33887);
-
-		// The Spigot update checker stays disabled until EggEmAll Reloaded has its own Spigot resource ID.
+		new SpigotUpdateChecker(this, 138577);
 
 		//set logging & chat prefixes
 		Common.setLogPrefix(Settings.LOG_PREFIX);
