@@ -9,7 +9,7 @@ on:
         default: modernize/paper-26.2
         type: choice
         options:
-          - modernize/paper-26.2
+          - rename/eggemall-reloaded
           - dev
           - master
 
