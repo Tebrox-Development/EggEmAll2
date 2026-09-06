@@ -1,10 +1,10 @@
 name: 🐛 Bug report
-description: Report a reproducible problem with EggEmAll2.
+description: Report a reproducible problem with EggEmAll Reloaded.
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for reporting a problem with EggEmAll2.
+        Thanks for reporting a problem with EggEmAll Reloaded.
         Please provide exact version information and clear reproduction steps so the issue can be reproduced reliably.
 
   - type: dropdown
@@ -34,7 +34,7 @@ body:
         Minecraft version: 26.2 / 1.21.7 / ...
         Server build/version: ...
         Java version: ...
-        EggEmAll2 version/snapshot/commit: ...
+        EggEmAll Reloaded version/snapshot/commit: ...
         Stacking plugin: None / RoseStacker / UltimateStacker / Other
         Relevant other plugins: ...
     validations:

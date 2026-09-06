@@ -4,14 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       source_ref:
-        description: Source branch to build
+        description: Source branch, tag or commit SHA to build
         required: true
-        default: modernize/paper-26.2
-        type: choice
-        options:
-          - rename/eggemall-reloaded
-          - dev
-          - master
+        default: master
+        type: string
 
 concurrency:
   group: snapshot-prerelease
@@ -22,7 +18,7 @@ permissions:
 
 jobs:
   release:
-    name: Build EggEmAll2 snapshot
+    name: Build EggEmAll Reloaded snapshot
     runs-on: [self-hosted, Linux, X64]
     timeout-minutes: 20
 
@@ -64,7 +60,7 @@ jobs:
           BASE_VERSION="${VERSION%-SNAPSHOT}"
           TAG="v${BASE_VERSION}-snapshot.${DATE}.${GITHUB_RUN_NUMBER}"
           SOURCE_JAR="target/${FINAL_NAME}.jar"
-          ASSET_NAME="EggEmAll2-${VERSION}-${SHORT_SHA}.jar"
+          ASSET_NAME="EggEmAllReloaded-${VERSION}-${SHORT_SHA}.jar"
 
           test -f "${SOURCE_JAR}"
           cp "${SOURCE_JAR}" "${ASSET_NAME}"
@@ -95,7 +91,7 @@ jobs:
               repo: context.repo.repo,
               tag_name: process.env.TAG,
               target_commitish: process.env.TARGET_SHA,
-              name: `EggEmAll2 ${process.env.VERSION} (${process.env.SHORT_SHA})`,
+              name: `EggEmAll Reloaded ${process.env.VERSION} (${process.env.SHORT_SHA})`,
               body: `Snapshot from ${process.env.SOURCE_REF} commit ${process.env.TARGET_SHA}.`,
               draft: false,
               prerelease: true,

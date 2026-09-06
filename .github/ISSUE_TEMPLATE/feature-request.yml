@@ -1,11 +1,11 @@
 name: ✨ Feature request
-description: Suggest an improvement or new capability for EggEmAll2.
+description: Suggest an improvement or new capability for EggEmAll Reloaded.
 title: "[Feature]: "
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for suggesting an improvement to EggEmAll2.
+        Thanks for suggesting an improvement to EggEmAll Reloaded.
         Please keep each issue focused on one feature so it can be discussed and tracked clearly.
 
   - type: textarea
@@ -21,7 +21,7 @@ body:
     id: solution
     attributes:
       label: Proposed solution
-      description: Describe how you would like EggEmAll2 to behave.
+      description: Describe how you would like EggEmAll Reloaded to behave.
       placeholder: Explain the requested behaviour from a server owner or player perspective.
     validations:
       required: true

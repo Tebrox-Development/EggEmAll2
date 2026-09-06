@@ -1,10 +1,14 @@
 name: ${project.name}
 version: ${project.version}
 main: ${main.class}
-author: ${author}
-api-version: 1.13
+authors:
+  - shadmage
+  - Tebrox-Development
+api-version: 1.21
+provides: [ EggEmAll2 ]
 softdepend: [ CMI, Vault, GriefPrevention, AuthMe, BanManager, BungeeChatAPI, DiscordSRV, Factions, Feudal, ItemsAdder, Essentials, LegacyFactions, Lands, LuckPerms, Multiverse-Core, MVdWPlaceholderAPI, MythicMobs, mcMMO, NashornPlus, Nicky, PlaceholderAPI, ProtocolLib, SimpleClans, Towny, TownyChat, WorldEdit, RoseStacker, UltimateStacker ]
-website: www.dirtydogsa.co.za
+website: https://github.com/Tebrox-Development/EggEmAll-Reloaded
+description: Maintained fork of EggEmAll2 that lets players capture entities with chicken eggs.
 
 permissions:
   eggemall.all:

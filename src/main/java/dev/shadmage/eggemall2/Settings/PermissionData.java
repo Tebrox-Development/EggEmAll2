@@ -10,6 +10,8 @@ public class PermissionData {
 	@Permission
 	public static final String RELOAD_COMMAND = "eggemall.command.reload";
 	@Permission
+	public static final String MIGRATE_COMMAND = "eggemall.command.migrate";
+	@Permission
 	public static final String CATCH_VILLAGERS = "eggemall.villagers";
 	@Permission
 	public static final String CATCH_AGGRESSIVE = "eggemall.aggressive";

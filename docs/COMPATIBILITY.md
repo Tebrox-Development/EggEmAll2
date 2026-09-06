@@ -1,6 +1,6 @@
 # Compatibility
 
-EggEmAll2 is maintained with current Paper support as the primary target while avoiding unnecessary runtime requirements.
+EggEmAll Reloaded is maintained with current Paper support as the primary target while avoiding unnecessary runtime requirements.
 
 ## Java
 
@@ -18,11 +18,17 @@ This distinction is intentional: the build environment can move forward without 
 | Spigot 1.21.7 | Manual functional validation passed |
 | Older than 1.21 | Not a maintenance target for this fork unless compatibility comes for free |
 
-The same EggEmAll2 JAR was manually validated across the tested Paper and Spigot runtimes. Functional validation covered the core capture flow, spawn-egg restoration, entity-data preservation, permissions, world restrictions, capture restrictions and chance handling.
+The same EggEmAll Reloaded JAR was manually validated across the tested Paper and Spigot runtimes. Functional validation covered the core capture flow, spawn-egg restoration, entity-data preservation, permissions, world restrictions, capture restrictions and chance handling.
 
-Optional stacking integrations were also exercised during runtime testing. RoseStacker and UltimateStacker both correctly allowed EggEmAll2 to capture one entity from a stack while reducing the remaining stack by exactly one.
+Optional stacking integrations were also exercised during runtime testing. RoseStacker and UltimateStacker both correctly allowed EggEmAll Reloaded to capture one entity from a stack while reducing the remaining stack by exactly one.
 
 Compile/API verification means the same source builds against the selected Paper API. Runtime validation is tracked separately and is only claimed after the plugin actually starts and the relevant gameplay flow has been exercised on that server line.
+
+## EggEmAll2 compatibility
+
+The existing `/eggemall` command, `eggemall.*` permission nodes and `%eggemall_...%` PlaceholderAPI namespace are intentionally retained. The Java package is also retained for the initial maintained-fork releases to avoid unnecessary binary compatibility breakage.
+
+The plugin descriptor declares `EggEmAll2` as a provided plugin name where supported by the server. Because the primary plugin name changes to `EggEmAllReloaded`, server owners upgrading an existing installation should back up and verify the plugin data directory during migration.
 
 ## Entity data compatibility
 
@@ -33,10 +39,10 @@ Eggs produced by upstream EggEmAll2 versions used the plugin PDC key `eggemall_e
 ## Compatibility rules
 
 1. Keep existing config keys and defaults unless a migration is necessary.
-2. Keep existing commands and permission nodes unless a security or correctness issue requires a change.
+2. Keep existing commands, placeholder identifiers and permission nodes unless a security or correctness issue requires a change.
 3. Prefer version-adapter or reflective fallbacks for isolated API differences instead of raising the whole plugin's minimum version.
 4. Do not emulate removed server behavior when doing so would be fragile or unsafe; document the minimum version instead.
-5. Keep optional integrations optional. A missing or incompatible stacker plugin must not prevent EggEmAll2 from starting.
+5. Keep optional integrations optional. A missing or incompatible stacker plugin must not prevent EggEmAll Reloaded from starting.
 
 ## Current dependency baseline
 

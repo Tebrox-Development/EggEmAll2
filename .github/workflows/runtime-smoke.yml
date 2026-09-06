@@ -105,7 +105,7 @@ jobs:
       - name: Verify and build plugin
         run: mvn -B -ntp verify
 
-      - name: Start Paper with EggEmAll2
+      - name: Start Paper with EggEmAll Reloaded
         env:
           PAPER_VERSION: '26.2'
           PAPER_BUILD: '121'
@@ -167,12 +167,12 @@ jobs:
       - name: Verify and build plugin
         run: mvn -B -ntp verify
 
-      - name: Start Paper with PlaceholderAPI and EggEmAll2
+      - name: Start Paper with PlaceholderAPI and EggEmAll Reloaded
         env:
           PAPER_VERSION: '26.2'
           PAPER_BUILD: '121'
           RUNTIME_VARIANT: 'with-papi'
           EXTRA_PLUGIN_URL: 'https://github.com/PlaceholderAPI/PlaceholderAPI/releases/download/2.12.3/PlaceholderAPI-2.12.3.jar'
           EXTRA_PLUGIN_NAME: 'PlaceholderAPI.jar'
-          EXPECT_LOG_PATTERN: 'PlaceholderAPI detected! Registered EggEmAll placeholders.'
+          EXPECT_LOG_PATTERN: 'PlaceholderAPI detected! Registered EggEmAll Reloaded placeholders.'
         run: bash scripts/runtime-smoke.sh

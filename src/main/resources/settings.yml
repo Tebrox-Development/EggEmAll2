@@ -2,8 +2,8 @@
 #                       Welcome to the main configuration of ${project.name}
 # !-----------------------------------------------------------------------------------------------!
 Version: 1
-LogPrefix: "&8[&aEggEmAll&8]"
-ChatPrefix: "&8[&aEggEmAll&8]"
+LogPrefix: "&8[&aEggEmAll Reloaded&8]"
+ChatPrefix: "&8[&aEggEmAll Reloaded&8]"
 Log_Lag_Over_Millis: 100
 Debug: [ ]
 Command_Aliases: [ eggemall ]
@@ -67,7 +67,7 @@ NBT:
   MaintainEntityDataValues: true
 
 GUI:
-  Title: "&9&l&oEgg Em All"
+  Title: "&9&l&oEggEmAll Reloaded"
   CatchableEntitiesTitle: "&2&l&oCatchable Entities"
   BlacklistedEntitiesTitle: "&c&l&oBlacklisted Entities"
 
