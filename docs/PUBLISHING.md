@@ -45,7 +45,20 @@ The repository has been renamed to **`Tebrox-Development/EggEmAll-Reloaded`**. C
 
 ## Upgrade check
 
-Because the Bukkit/Paper plugin name changes from `EggEmAll2` to `EggEmAllReloaded`, test an upgrade using an existing EggEmAll2 installation before the first public release. Back up the existing `plugins/EggEmAll2` data directory and verify how the configuration is migrated or copied to the new plugin data directory.
+Because the Bukkit/Paper plugin name changes from `EggEmAll2` to `EggEmAllReloaded`, EggEmAll Reloaded uses its own plugin data directory.
+
+Version 3.0.0 includes `/eggemall migrate` for importing an existing `plugins/EggEmAll2/settings.yml`. The command:
+
+- requires `eggemall.command.migrate`;
+- creates a backup of the current Reloaded `settings.yml` before replacing it;
+- leaves the original `plugins/EggEmAll2` directory untouched;
+- reloads the imported configuration immediately;
+- restores the previous Reloaded settings automatically if the imported configuration cannot be loaded;
+- creates a migration marker after success so the old settings are not imported again accidentally.
+
+When legacy settings are present and no successful migration has been recorded yet, the plugin prints a startup hint telling the administrator to run `/eggemall migrate`.
+
+Before the first public release, test the migration with a real EggEmAll2 installation and verify the imported gameplay settings, permissions and restrictions after reload. Also verify that a second `/eggemall migrate` attempt is rejected and that the old EggEmAll2 files remain unchanged.
 
 The following compatibility identifiers intentionally stay unchanged unless a separate breaking release explicitly decides otherwise:
 
