@@ -7,20 +7,20 @@ EXTRA_PLUGIN_URL="${EXTRA_PLUGIN_URL:-}"
 EXTRA_PLUGIN_NAME="${EXTRA_PLUGIN_NAME:-extra-plugin.jar}"
 EXPECT_LOG_PATTERN="${EXPECT_LOG_PATTERN:-}"
 RUNTIME_VARIANT="${RUNTIME_VARIANT:-base}"
-USER_AGENT="EggEmAll2-runtime-smoke/1.0 (https://github.com/Tebrox-Development/EggEmAll2)"
+USER_AGENT="EggEmAllReloaded-runtime-smoke/1.0 (https://github.com/Tebrox-Development/EggEmAll2)"
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUNTIME_DIR="${ROOT_DIR}/target/runtime-smoke-${PAPER_VERSION}-${PAPER_BUILD}-${RUNTIME_VARIANT}"
 SERVER_DIR="${RUNTIME_DIR}/server"
 LOG_FILE="${SERVER_DIR}/logs/latest.log"
 BUILD_JSON="${RUNTIME_DIR}/paper-builds.json"
 PROJECT_VERSION="$(mvn -B -ntp help:evaluate -Dexpression=project.version -q -DforceStdout)"
-PLUGIN_JAR="${ROOT_DIR}/target/EggEmAll2-${PROJECT_VERSION}.jar"
+PLUGIN_JAR="${ROOT_DIR}/target/EggEmAllReloaded-${PROJECT_VERSION}.jar"
 
 rm -rf "${RUNTIME_DIR}"
 mkdir -p "${SERVER_DIR}/plugins"
 
 if [[ ! -f "${PLUGIN_JAR}" ]]; then
-  echo "EggEmAll2 build artifact not found: ${PLUGIN_JAR}" >&2
+  echo "EggEmAll Reloaded build artifact not found: ${PLUGIN_JAR}" >&2
   exit 1
 fi
 
@@ -55,7 +55,7 @@ curl --fail --silent --show-error --location \
   "${PAPER_URL}" \
   --output "${SERVER_DIR}/paper.jar"
 
-cp "${PLUGIN_JAR}" "${SERVER_DIR}/plugins/EggEmAll2.jar"
+cp "${PLUGIN_JAR}" "${SERVER_DIR}/plugins/EggEmAllReloaded.jar"
 
 if [[ -n "${EXTRA_PLUGIN_URL}" ]]; then
   curl --fail --silent --show-error --location \
@@ -97,13 +97,13 @@ trap cleanup EXIT
 READY=0
 for _ in $(seq 1 180); do
   if ! kill -0 "${SERVER_PID}" 2>/dev/null; then
-    echo "Paper exited before EggEmAll2 reached ready state" >&2
+    echo "Paper exited before EggEmAll Reloaded reached ready state" >&2
     cat "${SERVER_DIR}/server-console.log" >&2 || true
     exit 1
   fi
 
   if [[ -f "${LOG_FILE}" ]] \
-    && grep -Fq 'EGG EM ALL' "${LOG_FILE}" \
+    && grep -Fq 'EGGEMALL RELOADED' "${LOG_FILE}" \
     && grep -Eq 'Done \([0-9.]+s\)! For help, type "help"' "${LOG_FILE}"; then
     READY=1
     break
@@ -112,13 +112,13 @@ for _ in $(seq 1 180); do
 done
 
 if [[ "${READY}" -ne 1 ]]; then
-  echo "Timed out waiting for Paper ${PAPER_VERSION} build ${PAPER_BUILD} and EggEmAll2" >&2
+  echo "Timed out waiting for Paper ${PAPER_VERSION} build ${PAPER_BUILD} and EggEmAll Reloaded" >&2
   cat "${SERVER_DIR}/server-console.log" >&2 || true
   exit 1
 fi
 
-if grep -Eiq '(Could not load.*EggEmAll2|Error occurred while enabling EggEmAll2|Exception.*EggEmAll2|Could not pass event.*EggEmAll2|NoClassDefFoundError.*EggEmAll2)' "${LOG_FILE}"; then
-  echo "EggEmAll2 startup error detected" >&2
+if grep -Eiq '(Could not load.*EggEmAllReloaded|Error occurred while enabling EggEmAllReloaded|Exception.*EggEmAllReloaded|Could not pass event.*EggEmAllReloaded|NoClassDefFoundError.*EggEmAllReloaded)' "${LOG_FILE}"; then
+  echo "EggEmAll Reloaded startup error detected" >&2
   cat "${LOG_FILE}" >&2
   exit 1
 fi
@@ -144,10 +144,10 @@ if kill -0 "${SERVER_PID}" 2>/dev/null; then
   exit 1
 fi
 
-if grep -Eiq '(Error occurred while disabling EggEmAll2|Exception.*EggEmAll2)' "${LOG_FILE}"; then
-  echo "EggEmAll2 shutdown error detected" >&2
+if grep -Eiq '(Error occurred while disabling EggEmAllReloaded|Exception.*EggEmAllReloaded)' "${LOG_FILE}"; then
+  echo "EggEmAll Reloaded shutdown error detected" >&2
   cat "${LOG_FILE}" >&2
   exit 1
 fi
 
-echo "Paper ${PAPER_VERSION} build ${PAPER_BUILD} startup smoke passed for EggEmAll2 on port ${SERVER_PORT}."
+echo "Paper ${PAPER_VERSION} build ${PAPER_BUILD} startup smoke passed for EggEmAll Reloaded on port ${SERVER_PORT}."
