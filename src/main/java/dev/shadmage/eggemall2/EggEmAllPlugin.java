@@ -32,6 +32,7 @@ public class EggEmAllPlugin extends SimplePlugin {
 
 	@Override
 	protected void onPluginStart() {
+		// TODO before public EggEmAll Reloaded release: replace both original-project IDs.
 		Metrics metrics = new Metrics(this, 15978);
 		SpigotUpdateChecker spigotUpdateChecker = new SpigotUpdateChecker(this, 122056);
 
@@ -41,7 +42,7 @@ public class EggEmAllPlugin extends SimplePlugin {
 
 		if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
 			if (PlaceholderAPISupport.registerExpansion(this)) {
-				Common.log("&6PlaceholderAPI detected! &fRegistered EggEmAll placeholders.");
+				Common.log("&6PlaceholderAPI detected! &fRegistered EggEmAll Reloaded placeholders.");
 			}
 		}
 
@@ -49,14 +50,14 @@ public class EggEmAllPlugin extends SimplePlugin {
 		RoseStackerSupport rsSupport = new RoseStackerSupport();
 		if (rsSupport.isStackingPluginLoaded()) {
 			stackingPlugin = rsSupport;
-			Common.log("&6RoseStacker detected! &fEgg em All will work with RoseStacker!");
+			Common.log("&6RoseStacker detected! &fEggEmAll Reloaded will work with RoseStacker!");
 			return;
 		}
 
 		UltimateStackerSupport usSupport = new UltimateStackerSupport();
 		if (usSupport.isStackingPluginLoaded()) {
 			stackingPlugin = usSupport;
-			Common.log("&6UltimateStacker detected! &fEgg em All will work with UltimateStacker!");
+			Common.log("&6UltimateStacker detected! &fEggEmAll Reloaded will work with UltimateStacker!");
 			return;
 		}
 
@@ -68,7 +69,7 @@ public class EggEmAllPlugin extends SimplePlugin {
 		catchableMobs = new SpawnEggs();
 		if (Settings.General.STARTUP_CONSOLE_STATS) {
 			//print plugin loaded summary to console
-			Common.log("&6===================== &bEGG EM ALL &6=====================");
+			Common.log("&6=============== &bEGGEMALL RELOADED &6===============");
 			Common.log("&aCatchable Entities: &f" + catchableMobs.countCatchableEntities());
 			Common.log("&cBlacklisted Entities: &f" + Settings.Restrictions.BLACKLISTED_ENTITIES.size());
 			Common.log((Settings.BlacklistWorlds.AS_WHITELIST ? "&aWhitelisted" : "&cBlacklisted") + " Worlds: &f" + Settings.BlacklistWorlds.WORLDS.size());
