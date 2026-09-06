@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: Stable version to build and release (for example 2.3.0)
+        description: Stable version to build and release (for example 3.0.0)
         required: true
-        default: '2.3.0'
+        default: '3.0.0'
         type: string
       source_ref:
         description: Source branch, tag or commit to release
