@@ -1,4 +1,17 @@
-# EggEmAll Reloaded
+<p align="center">
+  <img src="docs/assets/eggemall-reloaded-banner.jpg" alt="EggEmAll Reloaded">
+</p>
+
+<h1 align="center">EggEmAll Reloaded</h1>
+
+<p align="center">
+  <a href="https://www.spigotmc.org/resources/eggemall-reloaded.138577/">
+    <img src="https://img.shields.io/badge/Spigot-Download-orange?logo=spigotmc" alt="Spigot">
+  </a>
+  <a href="https://bstats.org/plugin/bukkit/EggEmAll%20Reloaded/33887">
+    <img src="https://img.shields.io/badge/bStats-Statistics-4c9b3f" alt="bStats">
+  </a>
+</p>
 
 **EggEmAll Reloaded** lets players capture entities and receive their spawn eggs by throwing chicken eggs at them.
 
