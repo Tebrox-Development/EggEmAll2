@@ -4,14 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       source_ref:
-        description: Source branch to build
+        description: Source branch, tag or commit SHA to build
         required: true
-        default: modernize/paper-26.2
-        type: choice
-        options:
-          - modernize/paper-26.2
-          - dev
-          - master
+        default: master
+        type: string
 
 concurrency:
   group: snapshot-prerelease
