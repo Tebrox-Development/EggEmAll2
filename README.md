@@ -24,7 +24,9 @@ See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md) for the current validation st
 
 ## Upgrading from EggEmAll2
 
-EggEmAll Reloaded uses a new plugin name. Existing command aliases and permission nodes remain unchanged, but server owners upgrading from EggEmAll2 should preserve their existing configuration before replacing the plugin and verify the plugin data directory during the first migration.
+EggEmAll Reloaded uses a new plugin name and therefore creates its own plugin data directory. Existing command aliases, permission nodes and PlaceholderAPI identifiers remain unchanged.
+
+If `plugins/EggEmAll2/settings.yml` is present, EggEmAll Reloaded reports this on startup. Run `/eggemall migrate` to import the legacy settings into the Reloaded data directory. The migration creates a backup of the current Reloaded `settings.yml`, leaves the original EggEmAll2 directory untouched and reloads the imported configuration. A successful migration is marked so the legacy file is not imported again accidentally.
 
 A release should not be published until the new SpigotMC resource ID has been configured and the new bStats project has been verified with a test server. See [docs/PUBLISHING.md](docs/PUBLISHING.md).
 
@@ -32,6 +34,7 @@ A release should not be published until the new SpigotMC resource ID has been co
 
 - `eggemall.command.reload` - reload the plugin
 - `eggemall.command.gui` - open the GUI showing catchable and blacklisted entities
+- `eggemall.command.migrate` - migrate `settings.yml` from an existing EggEmAll2 installation
 - `eggemall.all` - grant all category permissions below
 - `eggemall.villagers` - allow catching villager-type entities
 - `eggemall.aggressive` - allow catching monsters
@@ -45,6 +48,7 @@ For compatibility with upstream 2.1.1 configurations, the previous display-name-
 
 - `/eggemall menu` - opens the GUI with catchable and blacklisted mobs
 - `/eggemall reload` - reloads the plugin configuration
+- `/eggemall migrate` - safely imports `plugins/EggEmAll2/settings.yml` into EggEmAll Reloaded
 
 ## PlaceholderAPI
 
