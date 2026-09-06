@@ -50,6 +50,7 @@ public final class LegacyMigration {
 		Path dataDirectory = plugin.getDataFolder().toPath();
 		Files.createDirectories(dataDirectory);
 		Path target = dataDirectory.resolve(SETTINGS_FILE);
+		Path marker = getMigrationMarker(plugin);
 		Path backup = null;
 		boolean targetExisted = Files.isRegularFile(target);
 
@@ -67,15 +68,19 @@ public final class LegacyMigration {
 
 		try {
 			plugin.reload();
-		} catch (Throwable migrationFailure) {
-			rollback(plugin, target, backup, targetExisted, migrationFailure);
-			throw new IOException("The migrated settings could not be loaded. The previous Reloaded settings were restored.", migrationFailure);
-		}
 
-		Path marker = getMigrationMarker(plugin);
-		String markerContents = "Migrated EggEmAll2 settings from: " + source.toAbsolutePath() + System.lineSeparator()
-				+ "Migrated at: " + Instant.now() + System.lineSeparator();
-		Files.writeString(marker, markerContents, StandardCharsets.UTF_8);
+			String markerContents = "Migrated EggEmAll2 settings from: " + source.toAbsolutePath() + System.lineSeparator()
+					+ "Migrated at: " + Instant.now() + System.lineSeparator();
+			Files.writeString(marker, markerContents, StandardCharsets.UTF_8);
+		} catch (Throwable migrationFailure) {
+			try {
+				Files.deleteIfExists(marker);
+			} catch (IOException markerCleanupFailure) {
+				migrationFailure.addSuppressed(markerCleanupFailure);
+			}
+			rollback(plugin, target, backup, targetExisted, migrationFailure);
+			throw new IOException("The migration could not be completed. The previous Reloaded settings were restored.", migrationFailure);
+		}
 
 		return new MigrationResult(source, target, backup);
 	}
