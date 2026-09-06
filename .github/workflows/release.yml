@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       release_version:
-        description: Stable version to build and release (for example 2.2.0)
+        description: Stable version to build and release (for example 2.3.0)
         required: true
-        default: '2.2.0'
+        default: '2.3.0'
         type: string
       source_ref:
         description: Source branch, tag or commit to release
@@ -124,7 +124,7 @@ jobs:
 
           FINAL_NAME="$(mvn -B -ntp help:evaluate -Dexpression=project.build.finalName -q -DforceStdout)"
           SOURCE_JAR="target/${FINAL_NAME}.jar"
-          ASSET_NAME="EggEmAll2-${RELEASE_VERSION}.jar"
+          ASSET_NAME="EggEmAllReloaded-${RELEASE_VERSION}.jar"
           CHECKSUM_NAME="${ASSET_NAME}.sha256"
 
           test -f "${SOURCE_JAR}"
@@ -153,7 +153,7 @@ jobs:
             const fs = require('fs');
 
             const body = [
-              `Stable EggEmAll2 ${process.env.VERSION} release artifact built from ${process.env.SOURCE_REF} at ${process.env.TARGET_SHA}.`,
+              `Stable EggEmAll Reloaded ${process.env.VERSION} release artifact built from ${process.env.SOURCE_REF} at ${process.env.TARGET_SHA}.`,
               '',
               '### Verified before release',
               '',
@@ -168,7 +168,7 @@ jobs:
               repo: context.repo.repo,
               tag_name: process.env.TAG,
               target_commitish: process.env.TARGET_SHA,
-              name: `EggEmAll2 ${process.env.VERSION}`,
+              name: `EggEmAll Reloaded ${process.env.VERSION}`,
               body,
               draft: process.env.DRAFT === 'true',
               prerelease: false,
