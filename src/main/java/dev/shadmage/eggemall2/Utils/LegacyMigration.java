@@ -15,8 +15,8 @@ public final class LegacyMigration {
 	private static final String LEGACY_PLUGIN_DIRECTORY = "EggEmAll2";
 	private static final String SETTINGS_FILE = "settings.yml";
 	private static final String MIGRATION_MARKER = ".migrated-from-eggemall2";
-	private static final String LEGACY_DEFAULT_PREFIX = "&8[&aEggEmAll&8]";
-	private static final String RELOADED_DEFAULT_PREFIX = "&8[&aEggEmAll Reloaded&8]";
+	private static final String LEGACY_DEFAULT_PREFIX = "\"&8[&aEggEmAll&8]\"";
+	private static final String RELOADED_DEFAULT_PREFIX = "\"&8[&aEggEmAll Reloaded&8]\"";
 	private static final DateTimeFormatter BACKUP_TIMESTAMP = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss")
 			.withZone(ZoneOffset.UTC);
 
@@ -67,7 +67,7 @@ public final class LegacyMigration {
 		}
 
 		Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.COPY_ATTRIBUTES);
-		updateLegacyDefaultBranding(target);
+		upgradeLegacyDefaultPrefixes(target);
 
 		try {
 			plugin.reload();
@@ -88,20 +88,15 @@ public final class LegacyMigration {
 		return new MigrationResult(source, target, backup);
 	}
 
-	private static void updateLegacyDefaultBranding(Path settingsFile) throws IOException {
-		String settings = Files.readString(settingsFile, StandardCharsets.UTF_8);
-		String updated = replaceDefaultPrefix(settings, "LogPrefix");
-		updated = replaceDefaultPrefix(updated, "ChatPrefix");
+	private static void upgradeLegacyDefaultPrefixes(Path target) throws IOException {
+		String contents = Files.readString(target, StandardCharsets.UTF_8);
+		String updated = contents
+				.replace("LogPrefix: " + LEGACY_DEFAULT_PREFIX, "LogPrefix: " + RELOADED_DEFAULT_PREFIX)
+				.replace("ChatPrefix: " + LEGACY_DEFAULT_PREFIX, "ChatPrefix: " + RELOADED_DEFAULT_PREFIX);
 
-		if (!settings.equals(updated)) {
-			Files.writeString(settingsFile, updated, StandardCharsets.UTF_8);
+		if (!updated.equals(contents)) {
+			Files.writeString(target, updated, StandardCharsets.UTF_8);
 		}
-	}
-
-	private static String replaceDefaultPrefix(String settings, String key) {
-		return settings
-				.replace(key + ": \"" + LEGACY_DEFAULT_PREFIX + "\"", key + ": \"" + RELOADED_DEFAULT_PREFIX + "\"")
-				.replace(key + ": '" + LEGACY_DEFAULT_PREFIX + "'", key + ": '" + RELOADED_DEFAULT_PREFIX + "'");
 	}
 
 	private static void rollback(EggEmAllPlugin plugin, Path target, Path backup, boolean targetExisted, Throwable migrationFailure) {
