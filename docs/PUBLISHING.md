@@ -4,26 +4,34 @@ This checklist covers the remaining manual publication steps for the maintained 
 
 ## Release blockers
 
-The Spigot update checker is intentionally disabled until EggEmAll Reloaded has its own SpigotMC resource and resource ID.
+The EggEmAll Reloaded SpigotMC resource now exists at:
 
-Before the first public release:
+https://www.spigotmc.org/resources/eggemall-reloaded.138577/
 
-1. Create the new **SpigotMC resource** for EggEmAll Reloaded.
-2. Re-enable `SpigotUpdateChecker` in `src/main/java/dev/shadmage/eggemall2/EggEmAllPlugin.java` using the new EggEmAll Reloaded resource ID.
-3. Run the full Maven verification and runtime smoke tests again after the update checker is re-enabled.
-4. Verify on a test server that bStats reports to the registered EggEmAll Reloaded project ID `33887`.
+Its numeric resource ID is **`138577`**, and the Spigot update checker is enabled against that ID.
+
+Before the first stable public release:
+
+1. Run the full Maven verification and runtime smoke tests again with the update checker enabled.
+2. Verify on a test server that the update checker reaches resource ID `138577` without errors.
+3. Verify on a test server that bStats reports to the registered EggEmAll Reloaded project ID `33887`.
+4. Replace the temporary Snapshot build on SpigotMC with the final `3.0.0` release artifact.
 
 ## SpigotMC
 
-Publish the project as **EggEmAll Reloaded** and state clearly that it is a maintained fork of EggEmAll2 by shadmage / Dirty-Dog-Gaming, published with the original author's permission.
+EggEmAll Reloaded is published at:
 
-Link back to:
+https://www.spigotmc.org/resources/eggemall-reloaded.138577/
+
+The page should state clearly that it is a maintained fork of EggEmAll2 by shadmage / Dirty-Dog-Gaming, published with the original author's permission.
+
+Keep links to:
 
 - the original EggEmAll2 project/resource;
 - the original upstream GitHub repository;
 - the maintained Tebrox-Development repository.
 
-After the resource is live, add its final URL to the README and use its numeric resource ID when re-enabling the update checker.
+The runtime update checker uses SpigotMC resource ID **`138577`**.
 
 ## Modrinth
 
@@ -54,11 +62,12 @@ Version 3.0.0 includes `/eggemall migrate` for importing an existing `plugins/Eg
 - leaves the original `plugins/EggEmAll2` directory untouched;
 - reloads the imported configuration immediately;
 - restores the previous Reloaded settings automatically if the imported configuration cannot be loaded;
-- creates a migration marker after success so the old settings are not imported again accidentally.
+- creates a migration marker after success so the old settings are not imported again accidentally;
+- replaces only the legacy default `[EggEmAll]` log/chat prefixes with `[EggEmAll Reloaded]`, while preserving custom prefixes.
 
 When legacy settings are present and no successful migration has been recorded yet, the plugin prints a startup hint telling the administrator to run `/eggemall migrate`.
 
-Before the first public release, test the migration with a real EggEmAll2 installation and verify the imported gameplay settings, permissions and restrictions after reload. Also verify that a second `/eggemall migrate` attempt is rejected and that the old EggEmAll2 files remain unchanged.
+The migration has been manually validated on the 3.0.0 Snapshot line: the old settings were imported, the Reloaded settings backup was created, the original EggEmAll2 files remained untouched, and the imported configuration reloaded successfully.
 
 The following compatibility identifiers intentionally stay unchanged unless a separate breaking release explicitly decides otherwise:
 
@@ -69,9 +78,9 @@ The following compatibility identifiers intentionally stay unchanged unless a se
 
 ## Final release check
 
-Before uploading the first public build:
+Before uploading the first stable public build:
 
-- new Spigot resource exists and the update checker is re-enabled with its new resource ID;
+- Spigot resource `138577` exists and the update checker is enabled against it;
 - bStats project ID `33887` configured and reporting verified;
 - SpigotMC attribution text present;
 - Modrinth attribution/derivative disclosure present;
