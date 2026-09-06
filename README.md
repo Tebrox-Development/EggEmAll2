@@ -31,7 +31,7 @@ A release should not be published until the new SpigotMC resource ID has been co
 ## Permissions
 
 - `eggemall.command.reload` - reload the plugin
-- `eggemall.command.menu` - open the GUI showing catchable and blacklisted entities
+- `eggemall.command.gui` - open the GUI showing catchable and blacklisted entities
 - `eggemall.all` - grant all category permissions below
 - `eggemall.villagers` - allow catching villager-type entities
 - `eggemall.aggressive` - allow catching monsters
