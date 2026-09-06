@@ -2,12 +2,12 @@ package dev.shadmage.eggemall2;
 
 import dev.shadmage.eggemall2.Model.SpawnEggs;
 import dev.shadmage.eggemall2.Settings.Settings;
-import dev.shadmage.eggemall2._external.Metrics;
 import dev.shadmage.eggemall2._external.PlaceholderAPI.PlaceholderAPISupport;
 import dev.shadmage.eggemall2._external.SpigotUpdateChecker;
 import dev.shadmage.eggemall2._external.StackingPlugins.RoseStackerSupport;
 import dev.shadmage.eggemall2._external.StackingPlugins.StackingPluginAPI;
 import dev.shadmage.eggemall2._external.StackingPlugins.UltimateStackerSupport;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Egg;
 import org.mineacademy.fo.Common;
@@ -32,8 +32,9 @@ public class EggEmAllPlugin extends SimplePlugin {
 
 	@Override
 	protected void onPluginStart() {
-		// TODO before public EggEmAll Reloaded release: replace both original-project IDs.
-		Metrics metrics = new Metrics(this, 15978);
+		new Metrics(this, 33887);
+
+		// TODO before public EggEmAll Reloaded release: replace the original Spigot resource ID.
 		SpigotUpdateChecker spigotUpdateChecker = new SpigotUpdateChecker(this, 122056);
 
 		//set logging & chat prefixes
